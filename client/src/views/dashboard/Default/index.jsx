@@ -179,7 +179,7 @@ function SamplePage() {
   </Grid>
 
   <Grid item xs={12} md={4}>
-  <Link to="/dashboard/courseform">
+  <Link to="/dashboard/batchform">
     <ActionButton variant="contained" endIcon={<AddIcon style={{ fontSize: '23px' }} />} fullWidth>
     Create New Batch
     </ActionButton>
