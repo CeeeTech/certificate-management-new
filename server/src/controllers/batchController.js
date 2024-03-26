@@ -2,7 +2,7 @@ const   Batch = require('../models/modelBatch')
 const mongoose = require('mongoose')
 //get all 
 const getBatch = async(req,res)=>{
-    const batch = await Batch.find({}).sort({cratedAt :-1})
+    const batch = await Batch.find({}).sort({cratedAt :-4})
 
     res.status(200).json(batch)
 }
