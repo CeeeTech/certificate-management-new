@@ -39,7 +39,7 @@ const Sidebar = () => {
     const logo = useMemo(
         () => (
             <Box sx={{ display: 'flex', p: 2 }}>
-                <LogoSection />
+                {/* <LogoSection /> */}
             </Box>
         ),
         []
@@ -51,30 +51,11 @@ const Sidebar = () => {
     const handleLogout = async () => {
         try {
             await logout(); // Call the logout function
-            navigate('/login'); // Redirect to login page after logout
+            // navigate('/login'); // Redirect to login page after logout
         } catch (err) {
             console.error(err);
         }
     };
-
-//     return (
-//         // Other code ...
-
-//         <List>
-//             {/* Other menu items */}
-            
-//             {/* Logout button */}
-//             <ListItemButton onClick={handleLogout}>
-//                 <ListItemIcon>
-//                     <IconLogout />
-//                 </ListItemIcon>
-//                 <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
-//             </ListItemButton>
-//         </List>
-
-//         // Other code ...
-//     );
-// };
 
     const drawer = useMemo(() => {
         const isVerticalOpen = menuOrientation === MenuOrientation.VERTICAL && drawerOpen;
@@ -138,7 +119,7 @@ const Sidebar = () => {
                 </MiniDrawerStyled>
             )}
 
-<List>
+              <List>
                 {/* Other menu items */}
                 {/* Logout button */}
                 <ListItemButton onClick={handleLogout}>
