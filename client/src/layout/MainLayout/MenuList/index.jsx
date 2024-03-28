@@ -99,7 +99,8 @@ const MenuList = () => {
             default:
                 return (
                     <Typography key={item.id} variant="h6" color="error" align="center">
-                        Menu Items Error
+                        {/* Menu Items Error */}
+                             
                     </Typography>
                 );
         }

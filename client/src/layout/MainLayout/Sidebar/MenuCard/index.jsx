@@ -71,61 +71,61 @@ LinearProgressWithLabel.propTypes = {
 const MenuCard = () => {
     const theme = useTheme();
 
-    return (
-        <Card
-            sx={{
-                bgcolor: theme.palette.mode === ThemeMode.DARK ? 'dark.main' : 'primary.light',
-                mb: 2.75,
-                overflow: 'hidden',
-                position: 'relative',
-                '&:after': {
-                    content: '""',
-                    position: 'absolute',
-                    width: 157,
-                    height: 157,
-                    bgcolor: theme.palette.mode === ThemeMode.DARK ? 'dark.dark' : 'primary.200',
-                    borderRadius: '50%',
-                    top: -105,
-                    right: -96
-                }
-            }}
-        >
-            <Box sx={{ p: 2 }}>
-                <List disablePadding sx={{ m: 0 }}>
-                    <ListItem alignItems="flex-start" disableGutters disablePadding>
-                        <ListItemAvatar sx={{ mt: 0 }}>
-                            <Avatar
-                                variant="rounded"
-                                sx={{
-                                    ...theme.typography.commonAvatar,
-                                    ...theme.typography.largeAvatar,
-                                    color: 'primary.main',
-                                    border: theme.palette.mode === ThemeMode.DARK ? '1px solid' : 'none',
-                                    borderColor: 'primary.main',
-                                    bgcolor: 'background.paper'
-                                }}
-                            >
-                                <TableChartOutlinedIcon fontSize="inherit" />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                            sx={{ mt: 0 }}
-                            primary={
-                                <Typography
-                                    variant="subtitle1"
-                                    sx={{ color: theme.palette.mode === ThemeMode.DARK ? 'dark.light' : 'primary.800' }}
-                                >
-                                    Get Extra Space
-                                </Typography>
-                            }
-                            secondary={<Typography variant="caption"> 28/23 GB</Typography>}
-                        />
-                    </ListItem>
-                </List>
-                <LinearProgressWithLabel value={80} />
-            </Box>
-        </Card>
-    );
+    // return (
+    //     // <Card
+    //     //     sx={{
+    //     //         bgcolor: theme.palette.mode === ThemeMode.DARK ? 'dark.main' : 'primary.light',
+    //     //         mb: 2.75,
+    //     //         overflow: 'hidden',
+    //     //         position: 'relative',
+    //     //         '&:after': {
+    //     //             content: '""',
+    //     //             position: 'absolute',
+    //     //             width: 157,
+    //     //             height: 157,
+    //     //             bgcolor: theme.palette.mode === ThemeMode.DARK ? 'dark.dark' : 'primary.200',
+    //     //             borderRadius: '50%',
+    //     //             top: -105,
+    //     //             right: -96
+    //     //         }
+    //     //     }}
+    //     // >
+    //     //     {/* <Box sx={{ p: 2 }}>
+    //     //         <List disablePadding sx={{ m: 0 }}>
+    //     //             <ListItem alignItems="flex-start" disableGutters disablePadding>
+    //     //                 <ListItemAvatar sx={{ mt: 0 }}>
+    //     //                     <Avatar
+    //     //                         variant="rounded"
+    //     //                         sx={{
+    //     //                             ...theme.typography.commonAvatar,
+    //     //                             ...theme.typography.largeAvatar,
+    //     //                             color: 'primary.main',
+    //     //                             border: theme.palette.mode === ThemeMode.DARK ? '1px solid' : 'none',
+    //     //                             borderColor: 'primary.main',
+    //     //                             bgcolor: 'background.paper'
+    //     //                         }}
+    //     //                     >
+    //     //                         <TableChartOutlinedIcon fontSize="inherit" />
+    //     //                     </Avatar>
+    //     //                 </ListItemAvatar>
+    //     //                 {/* <ListItemText
+    //     //                     sx={{ mt: 0 }}
+    //     //                     primary={
+    //     //                         // <Typography
+    //     //                         //     variant="subtitle1"
+    //     //                         //     sx={{ color: theme.palette.mode === ThemeMode.DARK ? 'dark.light' : 'primary.800' }}
+    //     //                         // >
+    //     //                         //     Get Extra Space
+    //     //                         // </Typography>
+    //     //                     }
+    //     //                     secondary={<Typography variant="caption"> 28/23 GB</Typography>}
+    //     //                 /> */}
+    //     //             {/* </ListItem>
+    //     //         </List>
+    //     //         <LinearProgressWithLabel value={80} />
+    //     //     </Box> */} */}
+    //     // </Card>
+    // );
 };
 
 export default memo(MenuCard);
