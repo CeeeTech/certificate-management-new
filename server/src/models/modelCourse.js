@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const cmsBatch = new Schema({
+const cmscertificate = new Schema({
 
     courseName: {
         type: String,
@@ -25,4 +25,4 @@ const cmsBatch = new Schema({
 
 })
 
-module.exports = mongoose.model('modelBatch', cmsBatch)
+module.exports = mongoose.model('modelCourse', cmscertificate)
