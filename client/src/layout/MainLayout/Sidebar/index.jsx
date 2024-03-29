@@ -21,6 +21,10 @@ import { MenuOrientation } from 'config';
 import { drawerWidth } from 'store/constant';
 
 import { handlerDrawerOpen, useGetMenuMaster } from 'api/menu';
+import { List,ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { IconLogout } from '@tabler/icons-react';
+import useAuth from 'hooks/useAuth'; // Import the useAuth hook
+
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
@@ -41,13 +45,25 @@ const Sidebar = () => {
         []
     );
 
+    const { logout } = useAuth(); // Get the logout function from useAuth hook
+
+    // Handler for logout button click
+    const handleLogout = async () => {
+        try {
+            await logout(); // Call the logout function
+            navigate('/login'); // Redirect to login page after logout
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const drawer = useMemo(() => {
         const isVerticalOpen = menuOrientation === MenuOrientation.VERTICAL && drawerOpen;
         const drawerContent = (
             <>
                 <MenuCard />
                 <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
-                    <Chip label={import.meta.env.VITE_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} />
+                    {/* <Chip label={import.meta.env.VITE_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} /> */}
                 </Stack>
             </>
         );
@@ -102,6 +118,17 @@ const Sidebar = () => {
                     {drawer}
                 </MiniDrawerStyled>
             )}
+
+<List>
+                {/* Other menu items */}
+                {/* Logout button */}
+                <ListItemButton onClick={handleLogout}>
+                    <ListItemIcon>
+                        <IconLogout />
+                    </ListItemIcon>
+                    <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
+                </ListItemButton>
+            </List>
         </Box>
     );
 };
