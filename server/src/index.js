@@ -2,19 +2,21 @@ require('dotenv').config();
 
 
 const express = require('express')
-
+const cors = require('cors');
 const app = express()
-
 const cmsRoutes = require('./routes/student')
 const cmsCourseRoutes = require('./routes/Course')
-const mongoose = require('mongoose')
+const cmsBatchRoutes = require('./routes/Batches')
+ const mongoose = require('mongoose')
 
 app.get('/', (req, res) => {
     res.json({mssg:"welcome keshana  "})
 });
 app.use(express.json());
-app.use('/api/crm',cmsRoutes)
-app.use('/api/cmscoures', cmsCourseRoutes)
+app.use('/api/Student',cmsRoutes)
+app.use('/api/coures', cmsCourseRoutes)
+app.use('/api/batch' ,cmsBatchRoutes)
+app.use(cors());
 
 mongoose.connect(process.env.MONG_URL)
   .then(()=>{

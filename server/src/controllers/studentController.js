@@ -24,10 +24,10 @@ const getsinglestudent = async(req,res)=>{
 
 // create new student
 const  createStudent =async (req,res)=>{
-    const {name,nic,dbd,email,address,contactNumber,course,batch} = req.body
+    const {name,nic,dob,email, contact_no,address,date,scheduled_to,course,batch} = req.body
     
     try{
-      const cms = await Student.create({name,nic,dbd,email,address,contactNumber,course,batch})
+      const cms = await Student.create({name,nic,dob,email,contact_no,address,date,scheduled_to,course,batch})
       res.status(200).json(cms)
     }catch(error){
         res.status(400).json({error:error.message})

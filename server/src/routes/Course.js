@@ -4,17 +4,9 @@ const router = express.Router()
 
 router.get('/', getCourse)
 
-router.get('/:id', getCourse)
+router.get('/:id', getsingCourse)
 
 router.post('/', createCourse)
-// router.delete('/:id',(req,res)=>{
-//     res.json({mssg:"delete  a signle"})
-// })
-
-
-// router.patch('/:id',(req,res)=>{
-//     res.json({mssg:"update  a signle"})
-// })
 
 
 module.exports =router
