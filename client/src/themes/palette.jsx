@@ -41,6 +41,12 @@ const Palette = (mode, presetColor) => {
             colors = defaultColor;
     }
 
+    // Override primary color main property
+    colors.primaryMain = '#7f0220';
+
+    // Update secondary color to #B1032D
+    const secondaryColor = '#B1032D';
+
     return createTheme({
         palette: {
             mode,

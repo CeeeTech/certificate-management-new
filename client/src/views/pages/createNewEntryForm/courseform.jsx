@@ -25,24 +25,30 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SchoolIcon from '@mui/icons-material/School';
 
+
 export default function CourseForm() {
     const theme = useTheme();
     //const { user } = useAuthContext();
     //const { logout } = useLogout();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
+
     const [duration, setDuration] = useState('');
     const [courses] = useState([]);
     // const [statuses, setStatuses] = useState([]);
+    
 
     const date = new Date();
     const formattedDate = date.toISOString().split('T')[0];
+
+    
+
 
     const [CourseData] = useState({
         coursename: '',
         course_id: '',
         duration: '',
-        description: ''
+        description:''
     });
 
     //const fetchCourses = async () => {};
@@ -53,22 +59,25 @@ export default function CourseForm() {
 
     useEffect(() => {
         //fetchCourses();
-        // fetchBatches();
+       // fetchBatches();
         fetchStatuses();
         console.log(formattedDate);
     }, []);
+     
+
 
     const handleDurationChange = (event) => {
-        setDuration(event.target.value);
-    };
-
+      setDuration(event.target.value);
+  };
+  
     const handleDurationBlur = () => {
-        // You can perform validation or formatting if necessary
-    };
+      // You can perform validation or formatting if necessary
+  };
+  
 
     const handleSubmit = async (values) => {
         console.log('Submitting form with values:', values);
-        // Include duration in further processin
+       // Include duration in further processin
     };
 
     return (
@@ -80,6 +89,7 @@ export default function CourseForm() {
                         course_id: CourseData.course_id || '',
                         duration: CourseData.duration || '',
                         description: CourseData.description || ''
+                      
                     }}
                     onSubmit={handleSubmit}
                 >
@@ -89,12 +99,12 @@ export default function CourseForm() {
                                 <Grid container sx={{ p: 3 }} spacing={matchDownSM ? 0 : 2}>
                                     <Grid item xs={12} sm={6}>
                                         <Typography variant="h5" component="h5">
-                                            Course Name
+                                             Course Name
                                         </Typography>
                                         <TextField
                                             fullWidth
                                             margin="normal"
-                                            name="coursename"
+                                            name="name"
                                             type="text"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
@@ -134,9 +144,12 @@ export default function CourseForm() {
                                         />
                                     </Grid>
 
+                                    
+                                   
+
                                     <Grid item xs={12} sm={6}>
                                         <Typography variant="h5" component="h5">
-                                            Duration
+                                        Duration 
                                         </Typography>
                                         <TextField
                                             fullWidth
@@ -144,7 +157,7 @@ export default function CourseForm() {
                                             margin="normal"
                                             name="duration"
                                             type="text"
-                                            onChange={handleChange}
+                                            onChange={handleDurationChange}
                                             value={values.duration}
                                             onBlur={handleDurationBlur}
                                             error={Boolean(touched.duration && errors.duration)}
@@ -152,7 +165,7 @@ export default function CourseForm() {
                                             InputProps={{
                                                 startAdornment: (
                                                     <InputAdornment position="start">
-                                                        <ScheduleIcon />
+                                                         <ScheduleIcon />
                                                     </InputAdornment>
                                                 )
                                             }}
@@ -183,6 +196,8 @@ export default function CourseForm() {
                                             }}
                                         />
                                     </Grid>
+                                       
+                                    
                                 </Grid>
                                 <Divider sx={{ mt: 3, mb: 2 }} />
                                 <CardActions sx={{ justifyContent: 'flex-end' }}>

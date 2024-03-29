@@ -172,10 +172,12 @@ const UtilsGrid = Loadable(lazy(() => import('views/utilities/Grid')));
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
-const Refferal = Loadable(lazy(() => import('views/pages/createNewReferralForm/refferalform')));
+//const Refferal = Loadable(lazy(() => import('views/pages/createNewReferralForm/refferalform')));
 const ProfileUp = Loadable(lazy(() => import('views/pages/profileUpdate/profile')));
-
-
+const Course = Loadable(lazy(() => import('views/pages/createNewEntryForm/courseform')));
+const Batch = Loadable(lazy(() => import('views/pages/createNewEntryForm/batchform')));
+const Student = Loadable(lazy(() => import('views/pages/createNewEntryForm/studentform')));
+const Certificates = Loadable(lazy(() => import('views/pages/certificates/certificates')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -691,14 +693,30 @@ const MainRoutes = {
             path: '/dashboard/analytics',
             element: <DashboardAnalytics />
         },
-        {
-            path: '/pages/createNewReferralForm',
-            element: <Refferal />
-        },
+        // {
+        //     path: '/pages/createNewReferralForm',
+        //     element: <Refferal />
+        // },
         {
             path: 'pages/profileUpdate',
             element: <ProfileUp />
-        }
+        },
+        {
+            path: '/dashboard/courseform',
+            element: <Course />
+        },
+        {
+            path: '/dashboard/batchform',
+            element: <Batch />
+        },
+        {
+            path: '/dashboard/studentform',
+            element: <Student />
+        },
+        {
+            path: '/certificates',
+            element: <Certificates />
+        },
     ]
 };
 

@@ -15,7 +15,13 @@ export default function componentStyleOverrides(theme, borderRadius, outlinedFil
             styleOverrides: {
                 root: {
                     fontWeight: 500,
-                    borderRadius: '4px'
+                    borderRadius: '4px',
+
+                    // Update button color when hovered
+                    '&:hover': {
+                        backgroundColor: '#B1032D', // Your desired color
+                        color: '#ffffff' // Text color when hovered
+                    }
                 }
             }
         },
