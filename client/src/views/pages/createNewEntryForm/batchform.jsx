@@ -15,7 +15,7 @@ import { useState } from 'react';
 //import { useAuthContext } from '../../../context/useAuthContext';
 import PersonIcon from '@mui/icons-material/Person';
 import WidthFullIcon from '@mui/icons-material/WidthFull';
-//import * as Yup from 'yup';
+import * as Yup from 'yup';
 import { Formik } from 'formik';
 //import { useLogout } from '../../../hooks/useLogout';
 //import Swal from 'sweetalert2';
@@ -59,6 +59,15 @@ export default function batchForm() {
         
     });
 
+    const validationSchema = Yup.object().shape({
+        batch_id: Yup.string().required('Batch ID is required'),
+        duration: Yup.string().required('Duration is required'),
+        startdate: Yup.string().required('Start date is required'),
+        enddate: Yup.string().required('End date is required'),
+        numberOfStudents: Yup.number().required('Number of students is required'),
+        course: Yup.string().required('Course is required')
+    });
+
     const fetchCourses = async () => {};
 
    // const fetchBranches = async () => {};
@@ -91,6 +100,7 @@ export default function batchForm() {
                         
                     }}
                     onSubmit={handleSubmit}
+                    validationSchema={validationSchema}
                 >
                     {({ errors, handleBlur, handleChange, isSubmitting, touched, values }) => (
                         <form>

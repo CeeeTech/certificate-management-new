@@ -39,7 +39,7 @@ const Sidebar = () => {
     const logo = useMemo(
         () => (
             <Box sx={{ display: 'flex', p: 2 }}>
-                <LogoSection />
+                {/* <LogoSection /> */}
             </Box>
         ),
         []
@@ -109,7 +109,7 @@ const Sidebar = () => {
                     ModalProps={{ keepMounted: true }}
                     color="inherit"
                 >
-                    {downMD && logo}
+                    {downMD }
                     {drawer}
                 </Drawer>
             ) : (

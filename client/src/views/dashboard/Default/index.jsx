@@ -48,16 +48,14 @@ import { styled as mysysstyle } from '@mui/system';
 
 
 const rows = [
-  { id: 1, name: 'Steav', course: 'Access', mobile: '0445548964', earnings: 20000, status: 'Processing' },
-  { id: 2, name: 'Miller', course: 'Access', mobile: '0414188964', earnings: 20000, status: 'Processing' },
+  { id: 1, batchid: 'bt0002', course: 'Access', status: 'Processing' },
+  { id: 2, batchid: 'bt00', course: 'Access', status: 'Processing' },
   // Add more rows as needed
 ];
 
 const columns = [
-  { field: 'name', headerName: 'Students', width: 150 },
+  { field: 'batchid', headerName: 'Batch ID', width: 150 },
   { field: 'course', headerName: 'Course Name', width: 150 },
-  { field: 'mobile', headerName: 'Mobile Number', width: 150 },
-  { field: 'earnings', headerName: 'Earnings/Potential Earnings (LKR)', width: 200 },
   { field: 'status', headerName: 'Status', width: 150 },
 ];
 
@@ -275,6 +273,13 @@ function SamplePage() {
                             />
                         </Grid>
         </Grid>
+        <Grid item xs={12} md={4}>
+  <Link to="/batchStudentList">
+    <ActionButton variant="contained" endIcon={<AddIcon style={{ fontSize: '23px' }} />} fullWidth>
+    Batch student List 
+    </ActionButton>
+    </Link> 
+  </Grid>
         <Grid item xs={12}>
           {/* <TableContainer>
             <Table>

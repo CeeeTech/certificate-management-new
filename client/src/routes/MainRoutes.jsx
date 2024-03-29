@@ -178,7 +178,7 @@ const Course = Loadable(lazy(() => import('views/pages/createNewEntryForm/course
 const Batch = Loadable(lazy(() => import('views/pages/createNewEntryForm/batchform')));
 const Student = Loadable(lazy(() => import('views/pages/createNewEntryForm/studentform')));
 const Certificates = Loadable(lazy(() => import('views/pages/certificates/certificates')));
-
+const BatchStdList = Loadable(lazy(() => import('views/pages/batchStudentList/batchStudentList')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -717,6 +717,10 @@ const MainRoutes = {
             path: '/certificates',
             element: <Certificates />
         },
+        {
+            path: '/batchStudentList',
+            element: <BatchStdList />
+        }
     ]
 };
 
