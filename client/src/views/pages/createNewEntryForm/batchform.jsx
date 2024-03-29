@@ -84,6 +84,7 @@ export default function batchForm() {
     const handleSubmit = async (values) => {
         console.log('Submitting form with values:', values);
         // let batch_id = '';
+        setSubmitting(false);
     };
 
     return (
