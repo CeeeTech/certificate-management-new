@@ -15,7 +15,7 @@ import { useState } from 'react';
 //import { useAuthContext } from '../../../context/useAuthContext';
 import PersonIcon from '@mui/icons-material/Person';
 import WidthFullIcon from '@mui/icons-material/WidthFull';
-//import * as Yup from 'yup';
+import * as Yup from 'yup';
 import { Formik } from 'formik';
 //import { useLogout } from '../../../hooks/useLogout';
 //import Swal from 'sweetalert2';
@@ -47,6 +47,18 @@ export default function StudentForm() {
         course: '',
         batch: ''
     });
+
+    const validationSchema = Yup.object().shape({
+        name: Yup.string().required('Name is required'),
+        nic: Yup.string().required('NIC is required'),
+        dob: Yup.string().required('Date of birth is required'),
+        email: Yup.string().email('Invalid email address').required('Email is required'),
+        contact_no: Yup.string().required('Contact number is required'),
+        address: Yup.string().required('Address is required'),
+        date: Yup.string().required('Date is required'),
+        course: Yup.string().required('Course is required'),
+        batch: Yup.string().required('Batch is required'),
+      });
 
     const fetchCourses = async () => {};
 
@@ -83,6 +95,7 @@ export default function StudentForm() {
                         scheduled_to: StudentData.scheduled_to || ''
                     }}
                     onSubmit={handleSubmit}
+                    validationSchema={validationSchema} 
                 >
                     {({ errors, handleBlur, handleChange, isSubmitting, touched, values }) => (
                         <form>

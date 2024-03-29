@@ -15,7 +15,7 @@ import { useState } from 'react';
 //import { useAuthContext } from '../../../context/useAuthContext';
 import PersonIcon from '@mui/icons-material/Person';
 import WidthFullIcon from '@mui/icons-material/WidthFull';
-//import * as Yup from 'yup';
+import * as Yup from 'yup';
 import { Formik } from 'formik';
 //import { useLogout } from '../../../hooks/useLogout';
 //import Swal from 'sweetalert2';
@@ -50,6 +50,13 @@ export default function CourseForm() {
         duration: '',
         description:''
     });
+
+    const validationSchema = Yup.object().shape({
+        coursename: Yup.string().required('Course Name is required'),
+        course_id: Yup.string().required('Course ID is required'),
+        duration: Yup.string().required('Duration is required'),
+        description: Yup.string().required('Description is required'),
+      });
 
     //const fetchCourses = async () => {};
 
@@ -92,6 +99,7 @@ export default function CourseForm() {
                       
                     }}
                     onSubmit={handleSubmit}
+                    validationSchema={validationSchema}
                 >
                     {({ errors, handleBlur, handleChange, isSubmitting, touched, values }) => (
                         <form>
