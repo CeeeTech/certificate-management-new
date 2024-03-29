@@ -6,7 +6,7 @@ const express = require('express')
 const app = express()
 
 const cmsRoutes = require('./routes/student')
-const cmsbacthRoutes = require('./routes/batch')
+const cmsCourseRoutes = require('./routes/Course')
 const mongoose = require('mongoose')
 
 app.get('/', (req, res) => {
@@ -14,12 +14,12 @@ app.get('/', (req, res) => {
 });
 app.use(express.json());
 app.use('/api/crm',cmsRoutes)
-app.use('/api/cmsbatch', cmsbacthRoutes)
+app.use('/api/cmscoures', cmsCourseRoutes)
 
 mongoose.connect(process.env.MONG_URL)
   .then(()=>{
     app.listen(process.env.PORT, ()=>{
-        console.log("connect  dB ",process.env.PORT);
+        console.log("connect  db",process.env.PORT);
     })
   })
   .catch((error)=>{

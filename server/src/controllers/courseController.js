@@ -1,14 +1,14 @@
-const   Batch = require('../models/modelBatch')
+const   Batch = require('../models/modelCourse')
 const mongoose = require('mongoose')
 //get all 
-const getBatch = async(req,res)=>{
+const getCourse = async(req,res)=>{
     const batch = await Batch.find({}).sort({cratedAt :-1})
 
     res.status(200).json(batch)
 }
 
 //get a single
-const getsingbatch = async(req,res)=>{
+const getsingCourse = async(req,res)=>{
     const  {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(400).json({error:"no such  "})
@@ -23,7 +23,7 @@ const getsingbatch = async(req,res)=>{
 
 
 // create new student
-const  createbatch =async (req,res)=>{
+const  createCourse =async (req,res)=>{
     const {courseName,courseId,description,duration} = req.body
     
     try{
@@ -41,5 +41,5 @@ const  createbatch =async (req,res)=>{
 
 
 module.exports = {
-    createbatch,getBatch,getsingbatch
+    createCourse,getCourse,getsingCourse
 }

@@ -1,12 +1,12 @@
-const {createbatch,getBatch,getsingbatch} = require('../controllers/batchController')
+const {getCourse,getsingCourse,createCourse} = require('../controllers/courseController')
 const express = require('express')
 const router = express.Router()
 
-router.get('/', getBatch)
+router.get('/', getCourse)
 
-router.get('/:id', getsingbatch)
+router.get('/:id', getCourse)
 
-router.post('/', createbatch)
+router.post('/', createCourse)
 // router.delete('/:id',(req,res)=>{
 //     res.json({mssg:"delete  a signle"})
 // })
