@@ -66,6 +66,15 @@ const updateStudnet =  async (req,res)=>{
     res.status(200).json(stud)
 
 }
+// Get count of registered students
+const getStudentCount = async (req, res) => {
+    try {
+        const count = await Student.countDocuments();
+        res.status(200).json({ count });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
 
 
 module.exports = {
@@ -73,5 +82,6 @@ module.exports = {
     getStudent,
     getsinglestudent,
     deleteStudenet,
-    updateStudnet
+    updateStudnet,
+    getStudentCount
 }

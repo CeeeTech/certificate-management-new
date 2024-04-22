@@ -14,9 +14,11 @@ app.get('/', (req, res) => {
 });
 app.use(express.json());
 app.use('/api/Student',cmsRoutes)
-app.use('/api/coures', cmsCourseRoutes)
+app.use('/coures', cmsCourseRoutes)
 app.use('/api/batch' ,cmsBatchRoutes)
 app.use(cors());
+
+
 
 mongoose.connect(process.env.MONG_URL)
   .then(()=>{

@@ -1,11 +1,13 @@
 const   Course = require('../models/modelCourse')
 const mongoose = require('mongoose')
 //get all 
-const getCourse = async(req,res)=>{
-    const Course = await Course.find({}).sort({cratedAt :-1})
 
-    res.status(200).json(Course)
+const getCourse = async(req,res)=>{
+    const cms = await Course.find({}).sort({cratedAt :-1})
+
+    res.status(200).json(cms)
 }
+
 
 //get a single
 const getsingCourse = async(req,res)=>{
@@ -23,7 +25,7 @@ const getsingCourse = async(req,res)=>{
 
 
 // create new student
-const  createCourse =async (req,res)=>{
+const  createCourse = async (req,res)=>{
     const {courseName,courseId,duration,description} = req.body
     
     try{
@@ -40,5 +42,5 @@ const  createCourse =async (req,res)=>{
 
 
 module.exports = {
-    createCourse,getCourse,getsingCourse
+    createCourse,getsingCourse,getCourse
 }
