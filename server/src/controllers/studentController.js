@@ -1,5 +1,5 @@
 const   Student = require('../models/modelStudent')
-const mongoose = require('mongoose')
+
 //get all 
 const getStudent = async(req,res)=>{
     const stu = await Student.find({}).sort({cratedAt :-1})
@@ -24,10 +24,10 @@ const getsinglestudent = async(req,res)=>{
 
 // create new student
 const  createStudent =async (req,res)=>{
-    const {name,nic,dob,email, contact_no,address,date,scheduled_to,course,batch} = req.body
+    const {name,nic,dob,email, contact_no,address,date,course,batch} = req.body
     
     try{
-      const cms = await Student.create({name,nic,dob,email,contact_no,address,date,scheduled_to,course,batch})
+      const cms = await Student.create({name,nic,dob,email,contact_no,address,date,course,batch})
       res.status(200).json(cms)
     }catch(error){
         res.status(400).json({error:error.message})
