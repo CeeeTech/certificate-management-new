@@ -19,11 +19,7 @@ email: {
     type: String,
     required: true
 },
-contact_no: {
-    type: String,
-    required: true,
-    unique: true 
-},
+
 address: {
     type: String,
     required: true
@@ -32,17 +28,19 @@ date: {
     type: Date,
     default: Date.now
 },
-scheduled_to: {
-    type: Date
+contact_no: {
+    type: String,
+    required: true,
+    unique: true 
 },
 course: {
-  type: mongoose.Schema.Types.ObjectId, // Assuming batch is another document in the database
-  ref: 'Batch', // Reference to the Batch model
+  type: mongoose.Schema.Types.ObjectId, 
+  ref: 'Batch', 
   required: true
 },
 batch: {
-    type: mongoose.Schema.Types.ObjectId, // Assuming batch is another document in the database
-    ref: 'Batch', // Reference to the Batch model
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Batch', 
     required: true
 }
 });

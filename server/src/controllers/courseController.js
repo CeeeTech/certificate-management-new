@@ -1,44 +1,42 @@
-const   Course = require('../models/modelCourse')
-const mongoose = require('mongoose')
-//get all 
-const getCourse = async(req,res)=>{
-    const Course = await Course.find({}).sort({cratedAt :-1})
+const Course = require('../models/modelCourse');
 
-    res.status(200).json(Course)
-}
-
-//get a single
-const getsingCourse = async(req,res)=>{
-    const  {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({error:"no such  "})
+const getCourse = async (req, res) => {
+    try {
+        const courses = await Course.find({}).sort({ createdAt: -1 });
+        res.status(200).json(courses);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
-    const Course = await Course.findById(id)
+};
 
-    if(!Course){
-        return res.status(400).json({error:"no such  "})
+const getsingCourse = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: "Invalid ID" });
     }
-    res.status(200).json(Course)
-}
-
-
-// create new student
-const  createCourse =async (req,res)=>{
-    const {courseName,courseId,duration,description} = req.body
-    
-    try{
-      const cms = await Course.create({courseName,courseId,duration,description})
-      res.status(200).json(cms)
-      await Course.save();
-    }catch(error){
-        res.status(400).json({error:error.message})
+    try {
+        const course = await Course.findById(id);
+        if (!course) {
+            return res.status(404).json({ error: "Course not found" });
+        }
+        res.status(200).json(course);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
+};
 
-}
-
-
-
+const createCourse = async (req, res) => {
+    const { courseName, courseId, duration, description } = req.body;
+    try {
+        const newCourse = await Course.create({ courseName, courseId, duration, description });
+        res.status(201).json(newCourse);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
 module.exports = {
-    createCourse,getCourse,getsingCourse
-}
+    createCourse,
+    getsingCourse,
+    getCourse
+};
