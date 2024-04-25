@@ -221,7 +221,7 @@ function SamplePage() {
                                 </Grid>
                                 <Grid item xs={12} md={3}>
                                     <RevenueCard
-                                        primary="Batch Count"
+                                        primary="OnGoing Batches"
                                         secondary={batchCount.toString()}
                                         iconPrimary={SignalCellularAltTwoToneIcon}
                                         color="#32000c"
