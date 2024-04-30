@@ -15,12 +15,12 @@ const icons = {
    
     
 };
-const samplePage = {
-    id: 'Add New Student',
-    title: <FormattedMessage id="Add New Student" />,
+const Batch = {
+    id: 'Add New Batch',
+    title: <FormattedMessage id="Add New Batch" />,
     icon: icons.IconUserCheck,
     type: 'group',
-    url: '/dashboard/studentform'
+    url: '/dashboard/batchform'
 };
 
-export default samplePage;
+export default Batch;

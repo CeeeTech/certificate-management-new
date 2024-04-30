@@ -15,12 +15,12 @@ const icons = {
    
     
 };
-const samplePage = {
-    id: 'Add New Student',
-    title: <FormattedMessage id="Add New Student" />,
+const Course = {
+    id: 'Add New Course',
+    title: <FormattedMessage id="Add New Course" />,
     icon: icons.IconUserCheck,
     type: 'group',
-    url: '/dashboard/studentform'
+    url: '/dashboard/courseform'
 };
 
-export default samplePage;
+export default Course;
