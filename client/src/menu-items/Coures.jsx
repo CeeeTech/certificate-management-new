@@ -5,20 +5,20 @@ import { FormattedMessage } from 'react-intl';
 
 // assets
 import {
-    IconUserCheck
+    IconClipboard
   
 } from '@tabler/icons-react';
 
 // constant
 const icons = {
-    IconUserCheck,
+    IconClipboard,
    
     
 };
 const Course = {
     id: 'Add New Course',
     title: <FormattedMessage id="Add New Course" />,
-    icon: icons.IconUserCheck,
+    icon: icons.IconClipboard,
     type: 'group',
     url: '/dashboard/courseform'
 };

@@ -5,20 +5,20 @@ import { FormattedMessage } from 'react-intl';
 
 // assets
 import {
-    IconUserCheck
+    IconAntennaBars5
   
 } from '@tabler/icons-react';
 
 // constant
 const icons = {
-    IconUserCheck,
+    IconAntennaBars5,
    
     
 };
 const Batch = {
     id: 'Add New Batch',
     title: <FormattedMessage id="Add New Batch" />,
-    icon: icons.IconUserCheck,
+    icon: icons.IconAntennaBars5,
     type: 'group',
     url: '/dashboard/batchform'
 };
