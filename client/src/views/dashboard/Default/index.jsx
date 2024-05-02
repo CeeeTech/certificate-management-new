@@ -318,9 +318,9 @@ function SamplePage() {
           </TableContainer> */}
 
                         {/* Adding the DataTable component here */}
-                        <div style={{ height: 600, width: '100%' }}>
+                        {/* <div style={{ height: 600, width: '100%' }}>
                             <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelectio />
-                        </div>
+                        </div> */}
                     </Grid>
                 </Grid>
             </Container>

@@ -5,22 +5,22 @@ import { FormattedMessage } from 'react-intl';
 
 // assets
 import {
-    IconUserCheck
+    IconAntennaBars5
   
 } from '@tabler/icons-react';
 
 // constant
 const icons = {
-    IconUserCheck,
+    IconAntennaBars5,
    
     
 };
-const samplePage = {
-    id: 'Add New Student',
-    title: <FormattedMessage id="Add New Student" />,
-    icon: icons.IconUserCheck,
+const Batch = {
+    id: 'Add New Batch',
+    title: <FormattedMessage id="Add New Batch" />,
+    icon: icons.IconAntennaBars5,
     type: 'group',
-    url: '/dashboard/studentform'
+    url: '/dashboard/batchform'
 };
 
-export default samplePage;
+export default Batch;

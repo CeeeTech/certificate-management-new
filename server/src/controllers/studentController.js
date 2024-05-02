@@ -18,6 +18,7 @@ const getsinglestudent = async(req,res)=>{
     if(!stud){
         return res.status(400).json({error:"no such  "})
     }
+   
     res.status(200).json(stud)
 }
 
@@ -29,6 +30,15 @@ const  createStudent =async (req,res)=>{
     try{
       const cms = await Student.create({name,nic,dob,email,contact_no,address,date,course,batch})
       res.status(200).json(cms)
+
+      const existingno = await User.findOne({ contact_no });
+		if (existingno) {
+			return res.status(400).json({ error: "Phone Number is already taken" });
+		}
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ error: "Invalid email format" });
+        }
     }catch(error){
         res.status(400).json({error:error.message})
     }

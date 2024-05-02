@@ -7,11 +7,13 @@ import pages from './pages';
 import utilities from './utilities';
 import support from './support';
 import other from './other';
+import Batch from './Batch';
+import Course from './Coures';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [dashboard, application, forms, elements, samplePage, pages, utilities, support, other]
+    items: [dashboard, forms, elements, samplePage,Batch, Course, pages, utilities,  support, other]
 };
 
 export default menuItems;

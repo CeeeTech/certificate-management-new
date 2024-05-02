@@ -122,12 +122,12 @@ const Sidebar = () => {
 <List>
                 {/* Other menu items */}
                 {/* Logout button */}
-                <ListItemButton onClick={handleLogout}>
+                {/* <ListItemButton onClick={handleLogout}>
                     <ListItemIcon>
                         <IconLogout />
                     </ListItemIcon>
                     <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
-                </ListItemButton>
+                </ListItemButton> */}
             </List>
         </Box>
     );
