@@ -25,10 +25,10 @@ const getsinglestudent = async(req,res)=>{
 
 // create new student
 const  createStudent =async (req,res)=>{
-    const {name,nic,dob,email, contact_no,address,date,course,batch} = req.body
+    const {name,nic,dob,email, contact_no,address,date,course} = req.body
     
     try{
-      const cms = await Student.create({name,nic,dob,email,contact_no,address,date,course,batch})
+      const cms = await Student.create({name,nic,dob,email,contact_no,address,date,course})
       res.status(200).json(cms)
 
       const existingno = await User.findOne({ contact_no });
