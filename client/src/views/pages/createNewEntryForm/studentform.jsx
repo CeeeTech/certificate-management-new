@@ -25,13 +25,13 @@ export default function StudentForm() {
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
     const [courses, setCourses] = useState([]);
-    const [batches, setbaches] = useState([]);
+  
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
     useEffect(() => {
         fetchCourses();
-        fetchBatches();
+       
     }, []);
 
     const fetchCourses = async () => {
@@ -42,14 +42,7 @@ export default function StudentForm() {
             console.error('Error fetching courses:', error);
         }
     };
-    const fetchBatches = async () => {
-        try {
-            const response = await axios.get('http://localhost:8000/api/batch');
-            setbaches(response.data);
-        } catch (error) {
-            console.error('Error fetching batch:', error);
-        }
-    };
+   
 
     const handleOpenSnackbar = (message) => {
         setSnackbarMessage(message);
@@ -69,7 +62,7 @@ export default function StudentForm() {
         contact_no: '',
         date: '',
         course: '',
-        batch: '',
+       
     };
 
     const validationSchema = Yup.object().shape({
@@ -81,7 +74,7 @@ export default function StudentForm() {
         contact_no: Yup.string().required('Contact Number is required'),
         date: Yup.date().required('Date is required'),
         course: Yup.string().required('Course is required'),
-        batch: Yup.string().required('Course is required'),
+       
     });
 
     const handleSubmit = async (values, { resetForm }) => {
@@ -285,35 +278,7 @@ export default function StudentForm() {
                                         ))}
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <Typography variant="h5" component="h5">
-                                        Select Batch
-                                    </Typography>
-                                    <TextField
-                                        fullWidth
-                                        margin="normal"
-                                        name="batch"
-                                        select
-                                        value={values.batch}
-                                        onChange={handleChange}
-                                        error={Boolean(touched.batch && errors.batch)}
-                                        helperText={touched.batch && errors.batch}
-                                          InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <AssignmentIcon />
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                    >
-                                        <MenuItem value="">Select Batch</MenuItem>
-                                        {batches.map((Batch) => (
-                                            <MenuItem key={Batch._id} value={Batch._id}>
-                                                {Batch.batch_id}
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
-                                </Grid>
+                               
                             </Grid>
                             <Divider sx={{ mt: 3, mb: 2 }} />
                             <CardActions sx={{ justifyContent: 'flex-end' }}>

@@ -161,7 +161,7 @@ function SamplePage() {
                     color="primary"
                     startIcon={<SchoolIcon />}
                     component={Link}
-                    to="/certificates/certificates"
+                    to="/certificates"
                     sx={{ ml: 1.5 }}
                 >
                     Certificates
@@ -264,7 +264,7 @@ function SamplePage() {
             </Grid>
           </SearchBoxPaper> */}
 
-                        <Grid item xs={8} sm={5}>
+                        {/* <Grid item xs={8} sm={5}>
                             <Typography variant="h5" component="h5">
                                 Search
                             </Typography>
@@ -284,7 +284,7 @@ function SamplePage() {
                                     )
                                 }}
                             />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                     <Grid item xs={12}>
                         {/* <TableContainer>
