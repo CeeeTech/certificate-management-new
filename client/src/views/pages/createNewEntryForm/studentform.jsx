@@ -18,7 +18,8 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import EmailIcon from '@mui/icons-material/Email';
 import HomeIcon from '@mui/icons-material/Home';
 import CallIcon from '@mui/icons-material/Call';
-
+import SchoolIcon from '@mui/icons-material/School';
+import { Link } from 'react-router-dom';
 
 export default function StudentForm() {
     const theme = useTheme();
@@ -89,7 +90,7 @@ export default function StudentForm() {
     };
     return (
         <>
-            <MainCard title="Add New Student">
+            <MainCard title="Add New Student" >
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ errors, touched, handleChange, handleSubmit, isSubmitting, values }) => (
                     <form onSubmit={handleSubmit}>

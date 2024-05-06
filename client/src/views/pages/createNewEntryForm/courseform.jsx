@@ -13,7 +13,7 @@ import { useTheme } from '@mui/material/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import MuiAlert from '@mui/material/Alert';
-
+import { Link } from 'react-router-dom';
 const CourseForm = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -56,12 +56,11 @@ const CourseForm = () => {
     };
 
     return (
-        <MainCard title="Add New Course">
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={handleSubmit}
-            >
+        <MainCard
+            title="Add New Course"
+         
+        >
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ values, errors, touched, handleChange, handleSubmit, isSubmitting }) => (
                     <form onSubmit={handleSubmit}>
                         <Grid container direction="column" justifyContent="center">
@@ -171,12 +170,7 @@ const CourseForm = () => {
                 onClose={handleCloseSnackbar}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
-                <MuiAlert
-                    elevation={6}
-                    variant="filled"
-                    onClose={handleCloseSnackbar}
-                    severity="success"
-                >
+                <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success">
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>

@@ -1,7 +1,7 @@
 const express = require('express')
 
 const router = express.Router()
-const {createStudent,getStudent,getsinglestudent,deleteStudenet,updateStudnet,getStudentCount} = require('../controllers/studentController')
+const {createStudent,getStudent,getsinglestudent,updateStudnet,getStudentCount, deleteStudenet} = require('../controllers/studentController')
 router.get('/',getStudent)
 
 router.get('/count',getStudentCount)

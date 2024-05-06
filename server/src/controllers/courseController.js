@@ -1,5 +1,5 @@
 const Course = require('../models/modelCourse');
-
+const mongoose = require('mongoose')
 const getCourse = async (req, res) => {
     try {
         const courses = await Course.find({}).sort({ createdAt: -1 });
@@ -35,8 +35,25 @@ const createCourse = async (req, res) => {
     }
 };
 
+const deletecourse = async (req, res) => {
+    const { id } = req.params
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({error: 'No such workout'})
+    }
+  
+    const Dcourse = await Course.findOneAndDelete({_id: id})
+  
+    if(!Dcourse) {
+      return res.status(400).json({error: 'No such workout'})
+    }
+  
+    res.status(200).json(Dcourse)
+  }
+
 module.exports = {
     createCourse,
     getsingCourse,
-    getCourse
+    getCourse,
+    deletecourse
 };

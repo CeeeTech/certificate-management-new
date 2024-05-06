@@ -5,22 +5,22 @@ import { FormattedMessage } from 'react-intl';
 
 // assets
 import {
-    IconAntennaBars5
+    IconBrandAsana
   
 } from '@tabler/icons-react';
 
 // constant
 const icons = {
-    IconAntennaBars5,
+    IconBrandAsana,
    
     
 };
 const Batch = {
-    id: 'Add New Batch',
-    title: <FormattedMessage id="Add New Batch" />,
-    icon: icons.IconAntennaBars5,
+    id: 'Batches',
+    title: <FormattedMessage id=" Batches" />,
+    icon: icons. IconBrandAsana,
     type: 'group',
-    url: '/dashboard/batchform'
+    url: '/viewBatch'
 };
 
 export default Batch;

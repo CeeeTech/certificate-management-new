@@ -3,20 +3,16 @@ import {
     IconButton,
     Typography,
     Grid,
-    Table,
-    Box,
-    TableContainer,
-    TableHead,
-    TableRow,
+       Box,
+ 
+
+   
     TableCell,
-    TableBody,
+
     Button,
     Paper,
     Container,
-    InputBase,
-    Divider,
-    TextField,
-    InputAdornment
+
 } from '@mui/material';
 
 import { Link } from 'react-router-dom';
@@ -24,7 +20,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { DataGrid, gridClasses } from '@mui/x-data-grid';
 
 import { alpha, styled } from '@mui/material/styles';
-import { gridSpacing } from 'store/constant';
+
 import RevenueCard from 'ui-component/cards/RevenueCard';
 
 import MainCard from 'ui-component/cards/MainCard';
@@ -42,21 +38,6 @@ import InsertDriveFileTwoToneIcon from '@mui/icons-material/InsertDriveFileTwoTo
 //import { Search as SearchIcon } from '@mui/icons-material';
 import { styled as myStyled } from '@mui/material/styles'; // Import with alias
 
-import { styled as mysysstyle } from '@mui/system';
-
-const rows = [
-    { id: 1, name: 'Steav', course: 'Access', mobile: '0445548964', earnings: 20000, status: 'Processing' },
-    { id: 2, name: 'Miller', course: 'Access', mobile: '0414188964', earnings: 20000, status: 'Processing' }
-    // Add more rows as needed
-];
-
-const columns = [
-    { field: 'name', headerName: 'Students', width: 150 },
-    { field: 'course', headerName: 'Course Name', width: 150 },
-    { field: 'mobile', headerName: 'Mobile Number', width: 150 },
-    { field: 'earnings', headerName: 'Earnings/Potential Earnings (LKR)', width: 200 },
-    { field: 'status', headerName: 'Status', width: 150 }
-];
 
 const StripedDataGrid = styled(DataGrid)(({ theme }) => ({
     ['& .${gridClasses.row}.even']: {
@@ -151,11 +132,7 @@ function SamplePage() {
         <MainCard
             title="Dashboard"
             secondary={
-                // <Link to="/createNewReferralForm">
-                //     <Button variant="contained" endIcon={<AddIcon style={{ fontSize: '23px' }} />}>
-                //         Add New Refferal
-                //     </Button>
-
+             
                 <Button
                     variant="contained"
                     color="primary"
@@ -166,21 +143,12 @@ function SamplePage() {
                 >
                     Certificates
                 </Button>
-                // </Link>
+               
             }
         >
             <Container maxWidth="lg">
                 <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        {/* <HeaderPaper>
-            <Typography variant="h1" gutterBottom>
-              Welcome Miller
-            </Typography>
-            <Typography variant="body1">
-              <b>Use this portal to refer potential students to us, we will pay you a Student fee if the student registers with us!</b>
-            </Typography>
-          </HeaderPaper> */}
-                    </Grid>
+                 
                     <Grid container spacing={2}>
                         {/* Secondary ={ */}
                         <Grid item xs={12} md={4}>
@@ -249,79 +217,9 @@ function SamplePage() {
                     </Grid>
 
                     <Grid item xs={12}>
-                        {/* <SearchBoxPaper>
-            <Grid container alignItems="center">
-              <Grid item xs={1}>
-                <SearchIcon />
-              </Grid>
-              <Grid item xs={11}>
-                <InputBase
-                  placeholder="Search for Students"
-                  inputProps={{ 'aria-label': 'search Students' }}
-                  fullWidth
-                />
-              </Grid>
-            </Grid>
-          </SearchBoxPaper> */}
-
-                        {/* <Grid item xs={8} sm={5}>
-                            <Typography variant="h5" component="h5">
-                                Search
-                            </Typography>
-                            <TextField
-                                fullWidth
-                                // label="First Name"
-                                margin="normal"
-                                name="lead Report No"
-                                type="text"
-                                SelectProps={{ native: true }}
-                                defaultValue=""
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <SearchIcon />
-                                        </InputAdornment>
-                                    )
-                                }}
-                            />
-                        </Grid> */}
+       
                     </Grid>
-                    <Grid item xs={12}>
-                        {/* <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>Students</StyledTableCell>
-                  <StyledTableCell>Course Name</StyledTableCell>
-                  <StyledTableCell>Mobile Number</StyledTableCell>
-                  <StyledTableCell>Earnings/Potential Earnings (LKR)</StyledTableCell>
-                  <StyledTableCell>Status</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>Steav</TableCell>
-                  <TableCell>Access</TableCell>
-                  <TableCell>0445548964</TableCell>
-                  <TableCell>20000</TableCell>
-                  <TableCell>Processing</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Miller</TableCell>
-                  <TableCell>Access</TableCell>
-                  <TableCell>0414188964</TableCell>
-                  <TableCell>20000</TableCell>
-                  <TableCell>Processing</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer> */}
-
-                        {/* Adding the DataTable component here */}
-                        {/* <div style={{ height: 600, width: '100%' }}>
-                            <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelectio />
-                        </div> */}
-                    </Grid>
+             
                 </Grid>
             </Container>
         </MainCard>
