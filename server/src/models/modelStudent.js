@@ -17,7 +17,9 @@ dob: {
 },
 email: {
     type: String,
-    required: true
+    required: true, 
+    unique: true 
+    
 },
 
 address: {
@@ -33,11 +35,14 @@ contact_no: {
     required: true,
     unique: true 
 },
-course: {
-  type: mongoose.Schema.Types.ObjectId, 
-  ref: 'Batch', 
-  required: true
-},
+course: [
+    {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Batch', 
+        required: true,
+       
+      }
+]
 
 });
 

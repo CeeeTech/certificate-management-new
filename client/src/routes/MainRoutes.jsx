@@ -7,6 +7,10 @@ import Loadable from 'ui-component/Loadable';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 
 import { loader as productsLoader, productLoader } from 'api/products';
+import { element } from 'prop-types';
+import ViewCourse from 'views/pages/viewpages/ViewCourse';
+import ViewBatch from 'views/pages/viewpages/ViewBatch';
+import ViewStudent from 'views/pages/viewpages/ViewStudent';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -716,6 +720,18 @@ const MainRoutes = {
         {
             path: '/certificates',
             element: <Certificates />
+        },
+        {
+            path:'/viewCourse',
+            element:<ViewCourse/>
+        },
+        {
+            path:'/viewStudent',
+            element:<ViewStudent/>
+        },
+        {
+            path:'/viewBatch',
+            element:<ViewBatch/>
         },
     ]
 };

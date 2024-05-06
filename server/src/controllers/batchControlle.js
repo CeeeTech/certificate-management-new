@@ -1,5 +1,5 @@
 const   Batch = require('../models/modalBatch')
-
+const mongoose = require('mongoose')
 
 const getBatch = async (req, res) => {
       const Bat = await Batch.find({}).sort({ createdAt: -1 });
@@ -29,7 +29,24 @@ const getBatchCount = async (req, res) => {
   }
 };
 
+// delete a workout
+const deletebatch = async (req, res) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({error: 'No such workout'})
+  }
+
+  const Dbatch = await Batch.findOneAndDelete({_id: id})
+
+  if(!Dbatch) {
+    return res.status(400).json({error: 'No such workout'})
+  }
+
+  res.status(200).json(Dbatch)
+}
+
 
 module.exports = {
-  createBatch,getBatch,getBatchCount
+  createBatch,getBatch,getBatchCount,deletebatch
 }

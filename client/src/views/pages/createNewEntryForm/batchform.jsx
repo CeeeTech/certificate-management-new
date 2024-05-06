@@ -15,7 +15,8 @@ import MenuItem from '@mui/material/MenuItem';
 import GroupIcon from '@mui/icons-material/Group';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-
+import SchoolIcon from '@mui/icons-material/School';
+import { Link } from 'react-router-dom';
 const BatchForm = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -76,7 +77,9 @@ const BatchForm = () => {
     };
 
     return (
-        <MainCard title="Add New Batch">
+        <MainCard 
+    
+        >
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                 {({ errors, touched, handleChange, handleSubmit, isSubmitting, values }) => (
                     <form onSubmit={handleSubmit}>

@@ -1,5 +1,5 @@
 const   Student = require('../models/modelStudent')
-
+const mongoose = require('mongoose')
 //get all 
 const getStudent = async(req,res)=>{
     const stu = await Student.find({}).sort({cratedAt :-1})
@@ -24,26 +24,31 @@ const getsinglestudent = async(req,res)=>{
 
 
 // create new student
-const  createStudent =async (req,res)=>{
-    const {name,nic,dob,email, contact_no,address,date,course} = req.body
-    
-    try{
-      const cms = await Student.create({name,nic,dob,email,contact_no,address,date,course})
-      res.status(200).json(cms)
 
-      const existingno = await User.findOne({ contact_no });
-		if (existingno) {
-			return res.status(400).json({ error: "Phone Number is already taken" });
-		}
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({ error: "Invalid email format" });
+const createStudent = async (req, res) => {
+    const { name, nic, dob, email, contact_no, address, date, course } = req.body;
+
+    try {
+        // Check if email or contact number already exist in the database
+        const existingEmail = await Student.findOne({ email });
+        const existingContact = await Student.findOne({ contact_no });
+
+        if (existingEmail) {
+            return res.status(400).json({ error: "Email is already taken" });
         }
-    }catch(error){
-        res.status(400).json({error:error.message})
+
+        if (existingContact) {
+            return res.status(400).json({ error: "Contact Number is already taken" });
+        }
+
+        // Create new student if email and contact number are unique
+        const newStudent = await Student.create({ name, nic, dob, email, contact_no, address, date, course });
+        res.status(200).json(newStudent);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
-    
-} 
+};
+
 
 
 //delete
@@ -90,8 +95,8 @@ const getStudentCount = async (req, res) => {
 module.exports = {
     createStudent,
     getStudent,
-    getsinglestudent,
-    deleteStudenet,
+    getsinglestudent, 
     updateStudnet,
-    getStudentCount
+    getStudentCount,
+    deleteStudenet
 }
