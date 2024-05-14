@@ -39,21 +39,38 @@ const deletecourse = async (req, res) => {
     const { id } = req.params
   
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({error: 'No such workout'})
+      return res.status(400).json({error: 'No such '})
     }
   
     const Dcourse = await Course.findOneAndDelete({_id: id})
   
     if(!Dcourse) {
-      return res.status(400).json({error: 'No such workout'})
+      return res.status(400).json({error: 'No such '})
     }
   
     res.status(200).json(Dcourse)
   }
 
+  const updateCourse = async (req, res) => {
+    const { id } = req.params;
+    const { courseName, courseId, duration, description } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: "Invalid ID" });
+    }
+    try {
+        const updatedCourse = await Course.findByIdAndUpdate(id, { courseName, courseId, duration, description }, { new: true });
+        if (!updatedCourse) {
+            return res.status(404).json({ error: "Course not found" });
+        }
+        res.status(200).json(updatedCourse);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports = {
     createCourse,
     getsingCourse,
     getCourse,
-    deletecourse
+    deletecourse,updateCourse
 };

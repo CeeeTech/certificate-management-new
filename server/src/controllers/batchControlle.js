@@ -34,13 +34,13 @@ const deletebatch = async (req, res) => {
   const { id } = req.params
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({error: 'No such workout'})
+    return res.status(400).json({error: 'No such '})
   }
 
   const Dbatch = await Batch.findOneAndDelete({_id: id})
 
   if(!Dbatch) {
-    return res.status(400).json({error: 'No such workout'})
+    return res.status(400).json({error: 'No such '})
   }
 
   res.status(200).json(Dbatch)
