@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 function ViewStudent() {
     const [students, setStudents] = useState([]);
-
+    const [hoveredRowId, setHoveredRowId] = useState(null);
     useEffect(() => {
         const fetchStudents = async () => {
             try {
@@ -27,22 +27,22 @@ function ViewStudent() {
         fetchStudents();
     }, []);
 
-    const handleDeleteStudent = async (id,name) => {
-        if (window.confirm(`Are you sure you want to delete batch ${name}?`)) {
-        try {
-            const response = await fetch(`http://localhost:8000/api/student/${id}`, {
-                method: 'DELETE'
-            });
+    const handleDeleteStudent = async (id, name) => {
+        if (window.confirm(`Are you sure you want to delete Student ${name}?`)) {
+            try {
+                const response = await fetch(`http://localhost:8000/api/student/${id}`, {
+                    method: 'DELETE'
+                });
 
-            if (response.ok) {
-                setStudents(students.filter((student) => student._id !== id));
-            } else {
-                throw new Error('Failed to delete student');
+                if (response.ok) {
+                    setStudents(students.filter((student) => student._id !== id));
+                } else {
+                    throw new Error('Failed to delete student');
+                }
+            } catch (error) {
+                console.error('Error deleting student:', error);
             }
-        } catch (error) {
-            console.error('Error deleting student:', error);
         }
-    }
     };
 
     const columns = [
@@ -56,34 +56,42 @@ function ViewStudent() {
             headerName: 'Action',
             flex: 1,
             renderCell: (params) => (
-                <IconButton onClick={() => handleDeleteStudent(params.row._id, params.row.name)} aria-label="delete">
-                    <DeleteIcon />
-                </IconButton>
+                <IconButton
+                onClick={() => handleDeleteStudent(params.row._id, params.row.name)}
+                aria-label="delete"
+                style={{ color: hoveredRowId === params.row._id ? '#7f0220' : 'inherit' }}
+                onMouseEnter={() => setHoveredRowId(params.row._id)}
+                onMouseLeave={() => setHoveredRowId(null)}
+            >
+                <DeleteIcon />
+            </IconButton>
             )
         }
     ];
 
-
     const getRowId = (row) => row._id;
 
     return (
-        <MainCard title="View Students" secondary={
-            <Button variant="contained" color="primary" startIcon={<AddIcon />} component={Link} to="/dashboard/studentform" sx={{ ml: 1.5 }}>
-                Add New Student
-            </Button>
-        }>
+        <MainCard
+            title="View Students"
+            secondary={
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<AddIcon />}
+                    component={Link}
+                    to="/dashboard/studentform"
+                    sx={{ ml: 1.5 }}
+                >
+                    Add New Student
+                </Button>
+            }
+        >
             <div style={{ height: 600, width: '100%' }}>
-                <DataGrid
-                    rows={students}
-                    columns={columns}
-                    pageSize={5}
-                    pageSizeOptions={[5, 10]}
-                    getRowId={getRowId}
-                />
+                <DataGrid rows={students} columns={columns} pageSize={5} pageSizeOptions={[5, 10]} getRowId={getRowId} />
             </div>
         </MainCard>
     );
 }
 
 export default ViewStudent;
-

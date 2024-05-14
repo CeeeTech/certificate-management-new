@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import MainCard from 'ui-component/cards/MainCard';
 import { Button, CardActions, Divider, InputAdornment, Typography, useMediaQuery, Snackbar } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-import ScheduleIcon from '@mui/icons-material/Schedule';
+
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
@@ -18,8 +18,8 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import EmailIcon from '@mui/icons-material/Email';
 import HomeIcon from '@mui/icons-material/Home';
 import CallIcon from '@mui/icons-material/Call';
-import SchoolIcon from '@mui/icons-material/School';
-import { Link } from 'react-router-dom';
+
+
 
 export default function StudentForm() {
     const theme = useTheme();
@@ -297,7 +297,7 @@ export default function StudentForm() {
                 onClose={handleCloseSnackbar}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
-                <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success">
+                 <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success"   sx={{ backgroundColor: '#7f0220', color:'white' }} >
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>

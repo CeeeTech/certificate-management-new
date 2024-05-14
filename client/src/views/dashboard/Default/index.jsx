@@ -111,6 +111,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 function SamplePage() {
     const [registrationCount, setRegistrationCount] = useState(0);
     const [batchCount, setBatchCount] = useState(0);
+    const [pending, setpending] = useState(0)
     useEffect(() => {
         fetchRegistrationCount();
     }, []);
@@ -124,6 +125,10 @@ function SamplePage() {
             const batchResponse = await fetch('http://localhost:8000/api/batch/count');
             const batchData = await batchResponse.json();
             setBatchCount(batchData.count);
+
+            const certificatesResponse = await fetch('http://localhost:8000/api/certificates/count');
+            const CERTData = await certificatesResponse.json();
+            setpending(CERTData.count);
         } catch (error) {
             console.error('Error fetching registration count:', error);
         }
@@ -131,27 +136,27 @@ function SamplePage() {
     return (
         <MainCard
             title="Dashboard"
-            secondary={
+            // secondary={
              
-                <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<SchoolIcon />}
-                    component={Link}
-                    to="/certificates"
-                    sx={{ ml: 1.5 }}
-                >
-                    Certificates
-                </Button>
+            //     <Button
+            //         variant="contained"
+            //         color="primary"
+            //         startIcon={<SchoolIcon />}
+            //         component={Link}
+            //         to="/certificates"
+            //         sx={{ ml: 1.5 }}
+            //     >
+            //         Certificates
+            //     </Button>
                
-            }
+            // }
         >
             <Container maxWidth="lg">
-                <Grid container spacing={3}>
+                <Grid container spacing={2}>
                  
                     <Grid container spacing={2}>
                         {/* Secondary ={ */}
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={3}>
                             <Link to="/dashboard/studentform">
                                 <ActionButton variant="contained" endIcon={<AddIcon style={{ fontSize: '23px' }} />} fullWidth>
                                     Register New Student
@@ -159,7 +164,7 @@ function SamplePage() {
                             </Link>
                         </Grid>
 
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={3}>
                             <Link to="/dashboard/batchform">
                                 <ActionButton variant="contained" endIcon={<AddIcon style={{ fontSize: '23px' }} />} fullWidth>
                                     Create New Batch
@@ -167,10 +172,18 @@ function SamplePage() {
                             </Link>
                         </Grid>
 
-                        <Grid item xs={12} md={4}>
+                        <Grid item xs={12} md={3}>
                             <Link to="/dashboard/courseform">
                                 <ActionButton variant="contained" endIcon={<AddIcon style={{ fontSize: '23px' }} />} fullWidth>
                                     Create New Course
+                                </ActionButton>
+                            </Link>
+                        </Grid>
+
+                        <Grid item xs={12} md={3}>
+                            <Link to="/certificates">
+                                <ActionButton variant="contained" endIcon={<AddIcon style={{ fontSize: '23px' }} />} fullWidth>
+                                    Create New Cetificate
                                 </ActionButton>
                             </Link>
                         </Grid>
@@ -198,7 +211,7 @@ function SamplePage() {
                                 <Grid item xs={12} md={3}>
                                     <RevenueCard
                                         primary=" Pending Certificates"
-                                        secondary="0"
+                                        secondary={pending.toString()}
                                         iconPrimary={InsertDriveFileTwoToneIcon}
                                         color="#4c0113 "
                                     />

@@ -1,39 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import Grid from '@mui/material/Grid';
 import MainCard from 'ui-component/cards/MainCard';
-import { Button, CardActions, Divider, InputAdornment, Typography, useMediaQuery, Snackbar } from '@mui/material';
+import { Button, CardActions, Divider, InputAdornment, Typography, useMediaQuery, Snackbar, MenuItem } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-import ScheduleIcon from '@mui/icons-material/Schedule';
-import DescriptionIcon from '@mui/icons-material/Description';
-import SchoolIcon from '@mui/icons-material/School';
-import WidthFullIcon from '@mui/icons-material/WidthFull';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import MuiAlert from '@mui/material/Alert';
-import { Link } from 'react-router-dom';
-const CourseForm = () => {
+import DescriptionIcon from '@mui/icons-material/Description';
+import StarRateIcon from '@mui/icons-material/StarRate';
+const CertificateForm = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 
-    const initialValues = {
-        courseName: '',
-        courseId: '',
-        duration: '',
-        description: ''
-    };
-
-    const validationSchema = Yup.object().shape({
-        courseName: Yup.string().required('Course Name is required'),
-        courseId: Yup.string().required('Course ID is required'),
-        duration: Yup.string().required('Duration is required'),
-        description: Yup.string().required('Description is required')
-    });
-
+    const [courses, setCourses] = useState([]);
+   
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
+
+    useEffect(() => {
+        fetchCourses();
+   
+    }, []);
+
+    const fetchCourses = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/api/coures');
+            setCourses(response.data);
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+        }
+    };
+
+   
 
     const handleOpenSnackbar = (message) => {
         setSnackbarMessage(message);
@@ -44,44 +49,56 @@ const CourseForm = () => {
         setOpenSnackbar(false);
     };
 
+    const initialValues = {
+        Cname: '',
+        course: '',
+        Description: '',
+        markType: ''
+    };
+    
+    const validationSchema = Yup.object().shape({
+        Cname: Yup.string().required('Certificate name is required'),
+        course: Yup.string().required('Course is required'),
+        Description: Yup.string().required('Description is required'),
+        markType: Yup.string().required('Mark Type is required')
+    });
+    
     const handleSubmit = async (values, { resetForm }) => {
         try {
-            const res = await axios.post('http://localhost:8000/api/coures', values);
+            const res = await axios.post('http://localhost:8000/api/certificates', values);
             console.log(res.data);
             resetForm();
-            handleOpenSnackbar('Course added successfully');
+            handleOpenSnackbar('Certificate added successfully');
         } catch (error) {
             console.error('Error:', error);
         }
     };
 
     return (
-        <MainCard
-            title="Add New Course"
-         
-        >
+        <MainCard>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-                {({ values, errors, touched, handleChange, handleSubmit, isSubmitting }) => (
+                {({ errors, touched, handleChange, handleSubmit, isSubmitting, values, }) => (
                     <form onSubmit={handleSubmit}>
                         <Grid container direction="column" justifyContent="center">
                             <Grid container sx={{ p: 3 }} spacing={matchDownSM ? 0 : 2}>
+                              
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="h5" component="h5">
-                                        Course Name
+                                        Certificate Name
                                     </Typography>
                                     <TextField
                                         fullWidth
                                         margin="normal"
+                                        name="Cname"
                                         type="text"
-                                        name="courseName"
-                                        value={values.courseName}
+                                        value={values.Cname}
                                         onChange={handleChange}
-                                        error={touched.courseName && Boolean(errors.courseName)}
-                                        helperText={touched.courseName && errors.courseName}
+                                        error={Boolean(touched.Cname && errors.Cname)}
+                                        helperText={touched.Cname && errors.Cname}
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position="start">
-                                                    <SchoolIcon />
+                                                    <WorkspacePremiumIcon />
                                                 </InputAdornment>
                                             )
                                         }}
@@ -89,75 +106,89 @@ const CourseForm = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="h5" component="h5">
-                                        Course ID
+                                        Select Course
                                     </Typography>
                                     <TextField
                                         fullWidth
                                         margin="normal"
-                                        type="text"
-                                        name="courseId"
-                                        value={values.courseId}
+                                        name="course"
+                                        select
+                                        value={values.course}
                                         onChange={handleChange}
-                                        error={touched.courseId && Boolean(errors.courseId)}
-                                        helperText={touched.courseId && errors.courseId}
+                                        error={Boolean(touched.course && errors.course)}
+                                        helperText={touched.course && errors.course}
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position="start">
-                                                    <WidthFullIcon />
+                                                    <AssignmentIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
+                                    >
+                                        <MenuItem value="">Select Course</MenuItem>
+                                        {courses.map((course) => (
+                                            <MenuItem key={course._id} value={course._id}>
+                                                {course.courseName}
+                                            </MenuItem>
+                                        ))}
+                                    </TextField>
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <Typography variant="h5" component="h5">
+                                    Description
+                                    </Typography>
+                                    <TextField
+                                        fullWidth
+                                        margin="normal"
+                                        name="Description"
+                                        type="text"
+                                        value={values.Description}
+                                        onChange={handleChange}
+                                        error={Boolean(touched.Description && errors.Description)}
+                                        helperText={touched.Description && errors.Description}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                <DescriptionIcon />
                                                 </InputAdornment>
                                             )
                                         }}
                                     />
                                 </Grid>
-                                <Grid item xs={12} sm={6}>
+                              
+                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="h5" component="h5">
-                                        Duration
+                                        Select Mark Type
                                     </Typography>
                                     <TextField
                                         fullWidth
                                         margin="normal"
-                                        type="text"
-                                        name="duration"
-                                        value={values.duration}
+                                        name="markType"
+                                        select
+                                        value={values.markType}
                                         onChange={handleChange}
-                                        error={touched.duration && Boolean(errors.duration)}
-                                        helperText={touched.duration && errors.duration}
+                                        error={Boolean(touched.markType && errors.markType)}
+                                        helperText={touched.markType && errors.markType}
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position="start">
-                                                    <ScheduleIcon />
+                                                    <StarRateIcon />
                                                 </InputAdornment>
                                             )
                                         }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <Typography variant="h5" component="h5">
-                                        Description
-                                    </Typography>
-                                    <TextField
-                                        fullWidth
-                                        margin="normal"
-                                        type="text"
-                                        name="description"
-                                        value={values.description}
-                                        onChange={handleChange}
-                                        error={touched.description && Boolean(errors.description)}
-                                        helperText={touched.description && errors.description}
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <DescriptionIcon />
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                    />
+                                    >
+                                       
+                                        <MenuItem value="Credits">Credits</MenuItem>
+                                        <MenuItem value="Marks">Marks</MenuItem>
+                                        <MenuItem value="Percentage">Grade </MenuItem>
+                                    </TextField>
                                 </Grid>
                             </Grid>
                             <Divider sx={{ mt: 3, mb: 2 }} />
                             <CardActions sx={{ justifyContent: 'flex-end' }}>
                                 <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
-                                    {isSubmitting ? <CircularProgress size={20} color="inherit" /> : 'Add Course'}
+                                    {isSubmitting ? <CircularProgress size={20} color="inherit" /> : 'Add Certificate'}
                                 </Button>
                             </CardActions>
                         </Grid>
@@ -169,6 +200,7 @@ const CourseForm = () => {
                 autoHideDuration={6000}
                 onClose={handleCloseSnackbar}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              
             >
                 <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success"   sx={{ backgroundColor: '#7f0220', color:'white' }} >
                     {snackbarMessage}
@@ -178,4 +210,6 @@ const CourseForm = () => {
     );
 };
 
-export default CourseForm;
+export default CertificateForm;
+
+

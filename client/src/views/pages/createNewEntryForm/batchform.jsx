@@ -15,8 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import GroupIcon from '@mui/icons-material/Group';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import SchoolIcon from '@mui/icons-material/School';
-import { Link } from 'react-router-dom';
+
 const BatchForm = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -241,7 +240,7 @@ const BatchForm = () => {
                 onClose={handleCloseSnackbar}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
-                <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success">
+                <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success"   sx={{ backgroundColor: '#7f0220', color:'white' }} >
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
