@@ -1,8 +1,6 @@
 
-
-
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 import MainCard from 'ui-component/cards/MainCard';
 import { Button, IconButton } from '@mui/material';
@@ -13,7 +11,7 @@ import axios from 'axios';
 
 const ViewCetificates = () => {
     const [certificates, setCertificates] = useState([]);
-
+   const  navigate = useNavigate()
     useEffect(() => {
         const fetchCertificates = async () => {
             try {
@@ -76,26 +74,19 @@ const ViewCetificates = () => {
                                 </IconButton>
                             )
                         },
+                      
                         {
                             field: 'add',
                             headerName: 'Add',
                             flex: 1,
                             renderCell: (params) => (
                                 <IconButton
-                                component={Link}
-                                to={{
-                                    pathname: '/StudentCertificates',
-                                    state: {
-                                        certificateId: params.row._id,
-                                        certificateName: params.row.Cname,
-                                        description: params.row.description,
-                                        markType: params.row.markType
-                                    }
-                                }}
-                                aria-label="add"
-                            >
-                                <PersonAddAlt1Icon />
-                            </IconButton>
+                                    onClick={() => navigate('/StudentCertificates', { state: { Cname: params.row.Cname, Description: params.row.description, markType: params.row.markType } })}
+                                    aria-label="add"
+                                    style={{ color: '#7f0220' }}
+                                >
+                                    <PersonAddAlt1Icon />
+                                </IconButton>
                             )
                         }
                     ]}

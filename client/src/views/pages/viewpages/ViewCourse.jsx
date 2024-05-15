@@ -60,9 +60,7 @@ function ViewCourse() {
                 <IconButton
                     onClick={() => handleDeleteCourse(params.row._id, params.row.courseName)}
                     aria-label="delete"
-                    style={{ color: hoveredRowId === params.row._id ? '#7f0220' : 'inherit' }}
-                    onMouseEnter={() => setHoveredRowId(params.row._id)}
-                    onMouseLeave={() => setHoveredRowId(null)}
+                    style={{ color: '#7f0220' }}
                 >
                     <DeleteIcon />
                 </IconButton>

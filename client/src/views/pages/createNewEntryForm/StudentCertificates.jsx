@@ -1,55 +1,51 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import {
     Grid,
     Typography,
     TextField,
-    Autocomplete,
     MenuItem,
     Button,
     CardActions,
     CircularProgress,
     Snackbar,
     InputAdornment,
-    useMediaQuery,
+    useMediaQuery
 } from '@mui/material';
 import DescriptionIcon from '@mui/icons-material/Description';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import StarRateIcon from '@mui/icons-material/StarRate';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import StarRateIcon from '@mui/icons-material/StarRate';
 import MuiAlert from '@mui/material/Alert';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
 import MainCard from 'ui-component/cards/MainCard';
-
+import Autocomplete from '@mui/material/Autocomplete';
+import PersonIcon from '@mui/icons-material/Person';
+import { useLocation } from 'react-router';
 const StudentCertificates = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-    const location = useLocation();
-    const [initialValues, setInitialValues] = useState({
-        Cname: location.state?.certificateName || '',
-        Description: location.state?.description || '',
-        markType: location.state?.markType || '',
-        markValue: ''
-    });
+    const initialValues = {
+        sName: '',
+        markValue: '',
+        result: ''
+    };
+    const location = useLocation()
+    const [Cname, setCname] = useState('')
     const [students, setStudents] = useState([]);
+    const [Description,setDescription] = useState('')
+    const [markType,setmarkType] = useState('')
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
     useEffect(() => {
-        console.log(location.state); 
-        setInitialValues({
-            Cname: location.state?.certificateName || '',
-            Description: location.state?.description || '',
-            markType: location.state?.markType || '',
-            markValue: ''
-        });
-
         fetchStudents();
-    }, [location.state]);
-
+        console.log(location);
+            setCname(location.state.Cname);
+            setDescription(location.state.Description)
+            setmarkType(location.state.markType)
+    }, [location]);
     const fetchStudents = async () => {
         try {
             const response = await axios.get('http://localhost:8000/api/Student');
@@ -68,14 +64,15 @@ const StudentCertificates = () => {
         setOpenSnackbar(false);
     };
 
- 
     const validationSchema = Yup.object().shape({
-       
+        sName: Yup.string().required('Student is required'),
+        markValue: Yup.string().required('Mark Value is required'),
+        result: Yup.string().required('Result is required')
     });
 
     const handleSubmit = async (values, { resetForm }) => {
         try {
-            const res = await axios.post('http://localhost:8000/api/certificates', values);
+            const res = await axios.post('http://localhost:8000/api/StudentCertificates', values);
             console.log(res.data);
             resetForm();
             handleOpenSnackbar('Certificate added successfully');
@@ -90,7 +87,7 @@ const StudentCertificates = () => {
                 {({ errors, touched, handleChange, handleSubmit, isSubmitting, values }) => (
                     <form onSubmit={handleSubmit}>
                         <Grid container direction="column" justifyContent="center">
-                        <Grid container sx={{ p: 3 }} spacing={matchDownSM ? 0 : 2}>
+                            <Grid container sx={{ p: 3 }} spacing={matchDownSM ? 0 : 2}>
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="h5" component="h5">
                                         Certificate Name
@@ -100,7 +97,8 @@ const StudentCertificates = () => {
                                         margin="normal"
                                         name="Cname"
                                         type="text"
-                                        value={values.Cname}
+                                        value={Cname}
+                                        disabled
                                         onChange={handleChange}
                                         error={Boolean(touched.Cname && errors.Cname)}
                                         helperText={touched.Cname && errors.Cname}
@@ -118,7 +116,8 @@ const StudentCertificates = () => {
                                         margin="normal"
                                         name="Description"
                                         type="text"
-                                        value={values.Description}
+                                        value={Description}
+                                        disabled
                                         onChange={handleChange}
                                         error={Boolean(touched.Description && errors.Description)}
                                         helperText={touched.Description && errors.Description}
@@ -136,7 +135,8 @@ const StudentCertificates = () => {
                                         margin="normal"
                                         name="markType"
                                         select
-                                        value={values.markType}
+                                        value={markType}
+                                        disabled
                                         onChange={handleChange}
                                         error={Boolean(touched.markType && errors.markType)}
                                         helperText={touched.markType && errors.markType}
@@ -144,13 +144,15 @@ const StudentCertificates = () => {
                                             startAdornment: <StarRateIcon />
                                         }}
                                     >
-                                        <MenuItem value="">Select Mark Type</MenuItem>
+                                       
                                         <MenuItem value="Credits">Credits</MenuItem>
                                         <MenuItem value="Marks">Marks</MenuItem>
                                         <MenuItem value="Percentage">Grade</MenuItem>
                                     </TextField>
                                 </Grid>
-                                {values.markType === 'Credits' && (
+
+                                
+                                {markType === 'Credits' && (
                                     <Grid item xs={12} sm={6}>
                                         <Typography variant="h5" component="h5">
                                             Select Mark Value
@@ -172,18 +174,27 @@ const StudentCertificates = () => {
                                                 )
                                             }}
                                         >
-                                            <MenuItem value="">Select Mark Value</MenuItem>
+                                         
+                                            <MenuItem value="A+">A+</MenuItem>
                                             <MenuItem value="A">A</MenuItem>
                                             <MenuItem value="A-">A-</MenuItem>
-                                            <MenuItem value="A+">A+</MenuItem>
+                                            <MenuItem value="B+">B+</MenuItem>
                                             <MenuItem value="B">B</MenuItem>
                                             <MenuItem value="B-">B-</MenuItem>
-                                            <MenuItem value="B+">B+</MenuItem>
+                                            <MenuItem value="C+">C+</MenuItem>
+                                            <MenuItem value="C">C</MenuItem>
+                                            <MenuItem value="C-">C-</MenuItem>
+                                            <MenuItem value="D+">D+</MenuItem>
+                                            <MenuItem value="D">D</MenuItem>
+                                            <MenuItem value="D_">D-</MenuItem>
+                                            <MenuItem value="E">E</MenuItem>
+                                           
+                                            
                                         </TextField>
                                     </Grid>
                                 )}
 
-                                {values.markType !== 'Credits' && (
+                                {markType === 'Marks' && (
                                     <Grid item xs={12} sm={6}>
                                         <Typography variant="h5" component="h5">
                                             Mark Value
@@ -192,14 +203,36 @@ const StudentCertificates = () => {
                                             fullWidth
                                             margin="normal"
                                             name="markValue"
-                                            type="text"
+                                            type="number"
                                             value={values.markValue}
                                             onChange={handleChange}
                                             error={Boolean(touched.markValue && errors.markValue)}
                                             helperText={touched.markValue && errors.markValue}
+                                            inputProps={{ min: 0, max: 100, style: { appearance: 'none' } }}
                                         />
                                     </Grid>
                                 )}
+                         
+                                 {markType === 'Percentage' && (
+                                    <Grid item xs={12} sm={6}>
+                                        <Typography variant="h5" component="h5">
+                                            Mark Value
+                                        </Typography>
+                                        <TextField
+                                            fullWidth
+                                            margin="normal"
+                                            name="markValue"
+                                            type="number"
+                                            value={values.markValue}
+                                            onChange={handleChange}
+                                            error={Boolean(touched.markValue && errors.markValue)}
+                                            helperText={touched.markValue && errors.markValue}
+                                            inputProps={{ min: 0, max: 200, style: { appearance: 'none' } }}
+                                        />
+                                    </Grid>
+                                )}
+
+
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="h5" component="h5">
                                         Select Student
@@ -207,43 +240,45 @@ const StudentCertificates = () => {
                                     <Autocomplete
                                         fullWidth
                                         margin="normal"
-                                        id="student"
+                                        id="sName"
                                         options={students}
                                         getOptionLabel={(option) => option.name}
-                                        value={values.student ? students.find((student) => student._id === values.student) : null}
+                                        value={students.find((student) => student._id === values.sName) || null}
                                         onChange={(event, newValue) => {
-                                            setFieldValue('student', newValue ? newValue._id : '');
+                                            handleChange('sName')(newValue ? newValue._id : '');
                                         }}
                                         renderInput={(params) => (
                                             <TextField
+                                                fullWidth
+                                                margin="normal"
                                                 {...params}
-                                                error={Boolean(touched.student && errors.student)}
-                                                helperText={touched.student && errors.student}
+                                                error={Boolean(touched.sName && errors.sName)}
+                                                helperText={touched.sName && errors.sName}
                                                 InputProps={{
                                                     ...params.InputProps,
                                                     startAdornment: (
                                                         <InputAdornment position="start">
-                                                            <PeopleAltIcon />
+                                                            <PersonIcon />
                                                         </InputAdornment>
                                                     )
                                                 }}
                                             />
                                         )}
-                                    />{' '}
+                                    />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <Typography variant="h5" component="h5">
-                                        pass or fail
+                                        Pass or Fail
                                     </Typography>
                                     <TextField
                                         fullWidth
                                         margin="normal"
-                                        name="markType"
+                                        name="result"
                                         select
-                                        value={values.markType}
+                                        value={values.result}
                                         onChange={handleChange}
-                                        error={Boolean(touched.markType && errors.markType)}
-                                        helperText={touched.markType && errors.markType}
+                                        error={Boolean(touched.result && errors.result)}
+                                        helperText={touched.result && errors.result}
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position="start">
@@ -252,15 +287,14 @@ const StudentCertificates = () => {
                                             )
                                         }}
                                     >
-                                        <MenuItem value="Credits">pass</MenuItem>
-                                        <MenuItem value="Marks">fail</MenuItem>
+                                        <MenuItem value="Pass">Pass</MenuItem>
+                                        <MenuItem value="Fail">Fail</MenuItem>
                                     </TextField>
                                 </Grid>
-                            
                             </Grid>
                             <CardActions sx={{ justifyContent: 'flex-end', mt: 2 }}>
                                 <Button type="submit" variant="contained" color="primary" disabled={isSubmitting}>
-                                    {isSubmitting ? <CircularProgress size={20} color="inherit" /> : 'Add Certificate'}
+                                    {isSubmitting ? <CircularProgress size={20} color="inherit" /> : 'Add Student'}
                                 </Button>
                             </CardActions>
                         </Grid>
@@ -273,7 +307,7 @@ const StudentCertificates = () => {
                 onClose={handleCloseSnackbar}
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
             >
-                <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success">
+                <MuiAlert elevation={6} variant="filled" onClose={handleCloseSnackbar} severity="success" sx={{ backgroundColor: '#7f0220', color:'white' }}>
                     {snackbarMessage}
                 </MuiAlert>
             </Snackbar>
@@ -282,3 +316,5 @@ const StudentCertificates = () => {
 };
 
 export default StudentCertificates;
+
+
