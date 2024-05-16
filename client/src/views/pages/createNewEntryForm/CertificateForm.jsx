@@ -15,6 +15,7 @@ import * as Yup from 'yup';
 import MuiAlert from '@mui/material/Alert';
 import DescriptionIcon from '@mui/icons-material/Description';
 import StarRateIcon from '@mui/icons-material/StarRate';
+import LooksOneIcon from '@mui/icons-material/LooksOne';
 const CertificateForm = () => {
     const theme = useTheme();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -53,14 +54,16 @@ const CertificateForm = () => {
         Cname: '',
         course: '',
         Description: '',
-        markType: ''
+        markType: '',
+        Level:""
     };
     
     const validationSchema = Yup.object().shape({
         Cname: Yup.string().required('Certificate name is required'),
         course: Yup.string().required('Course is required'),
         Description: Yup.string().required('Description is required'),
-        markType: Yup.string().required('Mark Type is required')
+        markType: Yup.string().required('Mark Type is required'),
+        Level: Yup.string().required(' Level is required')
     });
     
     const handleSubmit = async (values, { resetForm }) => {
@@ -159,7 +162,7 @@ const CertificateForm = () => {
                               
                                  <Grid item xs={12} sm={6}>
                                     <Typography variant="h5" component="h5">
-                                        Select Mark Type
+                                         Mark Type
                                     </Typography>
                                     <TextField
                                         fullWidth
@@ -179,9 +182,47 @@ const CertificateForm = () => {
                                         }}
                                     >
                                        
-                                        <MenuItem value="Credits">Credits</MenuItem>
+                                     
+                                       <MenuItem value="Credits">Credits</MenuItem>
                                         <MenuItem value="Marks">Marks</MenuItem>
-                                        <MenuItem value="Percentage">Grade </MenuItem>
+                                        <MenuItem value="Grade">Grade</MenuItem>
+                                    </TextField>
+                                </Grid>
+                                 <Grid item xs={12} sm={6}>
+                                    <Typography variant="h5" component="h5">
+                                        Level
+                                    </Typography>
+                                    <TextField
+                                        fullWidth
+                                        margin="normal"
+                                        name="Level"
+                                        select
+                                        value={values.Level}
+                                        onChange={handleChange}
+                                        error={Boolean(touched.Level && errors.Level)}
+                                        helperText={touched.Level && errors.Level}
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <LooksOneIcon />
+                                                </InputAdornment>
+                                            )
+                                        }}
+                                    >
+                                       
+                                     
+                                       <MenuItem value="1">1</MenuItem>
+                                       <MenuItem value="2">2</MenuItem>
+                                       <MenuItem value="3">3</MenuItem>
+                                       <MenuItem value="4">4</MenuItem>
+                                       <MenuItem value="5">5</MenuItem>
+                                       <MenuItem value="6">6</MenuItem>
+                                       <MenuItem value="7">7</MenuItem>
+                                       <MenuItem value="8">8</MenuItem>
+                                       <MenuItem value="9">8</MenuItem>
+                                       <MenuItem value="10">10</MenuItem>
+                                       
+                                       
                                     </TextField>
                                 </Grid>
                             </Grid>

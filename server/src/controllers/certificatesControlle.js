@@ -10,10 +10,10 @@ const getCertificate = async (req, res) => {
 };
 
 const createCertificate = async (req, res) => {
-    const { Cname, course, Description, markType } = req.body;
+    const { Cname, course, Description, markType,Level } = req.body;
 
     try {
-        const newCertificate = await Certificate.create({ Cname, course, description: Description, markType });
+        const newCertificate = await Certificate.create({ Cname, course, description: Description, markType,Level });
         res.status(200).json(newCertificate);
     } catch (error) {
         res.status(400).json({ error: error.message });
