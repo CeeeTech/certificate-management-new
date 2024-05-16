@@ -7,8 +7,8 @@ import { Button, CardActions, Divider, InputAdornment, Typography, useMediaQuery
 import CircularProgress from '@mui/material/CircularProgress';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import axios from 'axios';
+
+import axios from 'utils/axios';
 import { useTheme } from '@mui/material/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';

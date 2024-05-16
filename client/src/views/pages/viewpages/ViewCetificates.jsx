@@ -7,7 +7,7 @@ import { Button, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import axios from 'axios';
+import axios from 'utils/axios';
 
 const ViewCetificates = () => {
     const [certificates, setCertificates] = useState([]);

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
@@ -7,7 +6,7 @@ import { Button, IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import axios from 'axios';
+import axios from 'utils/axios';
 
 const ViewStudentCertificates = () => {
     const [certificates, setCertificates] = useState([]);
