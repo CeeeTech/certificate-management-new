@@ -2,7 +2,7 @@ const StudentCertificate = require('../models/modelstudentCertificates');
 
 const getStudentCertificate = async (req, res) => {
     try {
-        const certificates = await StudentCertificate.find({}).sort({ createdAt: -1 });
+        const certificates = await StudentCertificate.find({}).populate({path:'sName', select:'name'}).sort({ createdAt: -1 });
         res.status(200).json(certificates);
     } catch (error) {
         res.status(500).json({ error: error.message });

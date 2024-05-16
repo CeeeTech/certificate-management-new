@@ -59,6 +59,7 @@ const ViewCetificates = () => {
                         { field: '_id', headerName: 'Certificate ID', flex: 1 },
                         { field: 'Cname', headerName: 'Certificate Name', flex: 1 },
                         { field: 'description', headerName: 'Description', flex: 1 },
+                        { field: 'course', headerName: 'Course', flex: 1,renderCell:(params) =>(params.row?.course?.courseName||'') },
                         { field: 'markType', headerName: 'Result', flex: 1 },
                         { field: 'Level', headerName: 'Level', flex: 1 },
                         {

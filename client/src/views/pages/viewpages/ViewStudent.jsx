@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 function ViewStudent() {
     const [students, setStudents] = useState([]);
-    const [hoveredRowId, setHoveredRowId] = useState(null);
+    
     useEffect(() => {
         const fetchStudents = async () => {
             try {
@@ -50,7 +50,7 @@ function ViewStudent() {
         { field: 'nic', headerName: 'NIC', flex: 1 },
         { field: 'email', headerName: 'Email', flex: 1 },
         { field: 'contact_no', headerName: 'Phone Number', flex: 1 },
-        { field: 'course', headerName: 'Course', flex: 1 },
+        { field: 'course', headerName: 'Course', flex: 1,renderCell:(params) =>(params.row?.course?.courseName||'') },
         {
             field: 'action',
             headerName: 'Action',
@@ -68,7 +68,7 @@ function ViewStudent() {
     ];
 
     const getRowId = (row) => row._id;
-
+console.log('students',students)
     return (
         <MainCard
             title="View Students"

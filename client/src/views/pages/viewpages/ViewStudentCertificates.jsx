@@ -38,17 +38,17 @@ const ViewStudentCertificates = () => {
 
     return (
         <MainCard
-            title="View Studnet Certificates"
+            title="View  Certificates"
             secondary={
                 <Button
                     variant="contained"
                     color="primary"
                     startIcon={<AddIcon />}
                     component={Link}
-                    to="/certificates"
+                    to="/viewCertificates"
                     sx={{ ml: 1.5 }}
                 >
-                    Create New Certificate
+                    View Certificate
                 </Button>
             }
         >
@@ -57,7 +57,8 @@ const ViewStudentCertificates = () => {
                     rows={certificates}
                     columns={[
                         { field: '_id', headerName: 'Certificate ID', flex: 1 },
-                        { field: 'sName', headerName: 'Student Name', flex: 1 },
+                       
+                        { field: 'sName', headerName: 'Student Name', flex: 1,renderCell:(params) =>(params.row?.sName?.name||'') },
                         { field: 'markValue', headerName: 'Certificate Name', flex: 1 },
                         { field: 'result', headerName: 'Description', flex: 1 },
                         
