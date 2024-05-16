@@ -78,6 +78,7 @@ export default function StudentForm() {
        
     });
 
+
     const handleSubmit = async (values, { resetForm }) => {
         try {
             const res = await axios.post('http://localhost:8000/api/Student', values);
@@ -85,9 +86,25 @@ export default function StudentForm() {
             resetForm();
             handleOpenSnackbar('Student added successfully');
         } catch (error) {
-            console.error('Error:', error);
+            if (error.response) {
+                const { status, data } = error.response;
+                if (status === 400) {
+                    if (data.error === "Email is already taken") {
+                        handleOpenSnackbar("Email is already taken");
+                    } else if (data.error === "Contact Number is already taken") {
+                        handleOpenSnackbar("Contact Number is already taken");
+                    } else {
+                        console.error("Unknown error:", data.error);
+                    }
+                } else {
+                    console.error("Server error:", error.response);
+                }
+            } else {
+                console.error("Network error:", error.message);
+            }
         }
     };
+    
     return (
         <>
             <MainCard title="Add New Student" >

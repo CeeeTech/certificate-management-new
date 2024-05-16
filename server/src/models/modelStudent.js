@@ -35,14 +35,14 @@ contact_no: {
     required: true,
     unique: true 
 },
-course: [
+course: 
     {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Batch', 
+        ref: 'CmsCourse', 
         required: true,
        
       }
-]
+
 
 });
 

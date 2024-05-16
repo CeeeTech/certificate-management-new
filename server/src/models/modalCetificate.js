@@ -8,7 +8,7 @@ const CertificateSchema = new mongoose.Schema({
     },
     course: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course',
+        ref: 'CmsCourse', 
         required: true
     },
     description: {

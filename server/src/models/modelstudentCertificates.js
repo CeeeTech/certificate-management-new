@@ -8,7 +8,7 @@ const StudentCertificates = new Schema({
     sName: 
         {
             type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Studnet', 
+            ref: 'modelStudent', 
             required: true,
            
           }

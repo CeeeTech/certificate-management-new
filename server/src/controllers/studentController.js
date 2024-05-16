@@ -2,8 +2,9 @@ const   Student = require('../models/modelStudent')
 const mongoose = require('mongoose')
 //get all 
 const getStudent = async(req,res)=>{
-    const stu = await Student.find({}).sort({cratedAt :-1})
 
+    const stu = await Student.find({}).populate({path:'course', select:'courseName'}).sort({cratedAt :-1})
+   console.log("kesjs",stu);
     res.status(200).json(stu)
 }
 
