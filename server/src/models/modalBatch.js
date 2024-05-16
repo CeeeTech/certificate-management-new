@@ -24,7 +24,7 @@ const batchSchema = new mongoose.Schema({
     },
     course: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course', // Reference to the 'Course' model
+        ref: 'Course', 
         required: true
     }
 });

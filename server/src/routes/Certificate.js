@@ -1,4 +1,4 @@
-// routes/certificate.js
+
 const express = require('express');
 const router = express.Router();
 const { getCertificate, createCertificate, deleteCertificate } = require('../controllers/certificatesControlle');
