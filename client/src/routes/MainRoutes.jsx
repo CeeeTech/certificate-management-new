@@ -14,6 +14,7 @@ import ViewStudent from 'views/pages/viewpages/ViewStudent';
 import CertificateForm from 'views/pages/createNewEntryForm/CertificateForm';
 import ViewCetificates from 'views/pages/viewpages/ViewCetificates';
 import StudentCertificates from 'views/pages/createNewEntryForm/StudentCertificates';
+import ViewStudentCertificates from 'views/pages/viewpages/ViewStudentCertificates';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -743,6 +744,10 @@ const MainRoutes = {
         {
             path:'/StudentCertificates',
             element:<StudentCertificates/>
+        },
+        {
+            path:'/viewStudentCertificates',
+            element:<ViewStudentCertificates/>
         },
     ]
 };

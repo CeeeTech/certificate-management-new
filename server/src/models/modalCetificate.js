@@ -18,6 +18,10 @@ const CertificateSchema = new mongoose.Schema({
     markType: {
         type: String,
         required: true
+    },
+    Level: {
+        type: String,
+        required: true
     }
 });
 
