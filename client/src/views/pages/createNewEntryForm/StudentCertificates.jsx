@@ -17,7 +17,7 @@ import StarRateIcon from '@mui/icons-material/StarRate';
 import MuiAlert from '@mui/material/Alert';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import axios from 'utils/axios';
 import { useTheme } from '@mui/material/styles';
 import MainCard from 'ui-component/cards/MainCard';
 import Autocomplete from '@mui/material/Autocomplete';
