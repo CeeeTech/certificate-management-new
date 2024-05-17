@@ -126,9 +126,6 @@ function SamplePage() {
             const batchData = await batchResponse.json();
             setBatchCount(batchData.count);
 
-            const certificatesResponse = await fetch('http://localhost:8000/api/StudentCertificates/count');
-            const CERTData = await certificatesResponse.json();
-            setpending(CERTData.count);
         } catch (error) {
             console.error('Error fetching registration count:', error);
         }

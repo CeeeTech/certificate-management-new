@@ -56,7 +56,9 @@ function ViewBatch() {
                 <IconButton
                     onClick={() => handleDeleteBatch(params.row._id, params.row.batch_id)}
                     aria-label="delete"
-                    style={{ color: '#7f0220' }}
+                    style={{ color: hoveredRowId === params.row._id ? '#7f0220' : 'inherit' }}
+                    onMouseEnter={() => setHoveredRowId(params.row._id)}
+                    onMouseLeave={() => setHoveredRowId(null)}
                 >
                     <DeleteIcon />
                 </IconButton>

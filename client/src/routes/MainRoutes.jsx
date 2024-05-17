@@ -14,6 +14,7 @@ import ViewStudent from 'views/pages/viewpages/ViewStudent';
 import CertificateForm from 'views/pages/createNewEntryForm/CertificateForm';
 import ViewCetificates from 'views/pages/viewpages/ViewCetificates';
 import StudentCertificates from 'views/pages/createNewEntryForm/StudentCertificates';
+import CreateNewUser from 'views/pages/createNewEntryForm/AddUser';
 import ViewStudentCertificates from 'views/pages/viewpages/ViewStudentCertificates';
 
 // dashboard routing
@@ -724,6 +725,10 @@ const MainRoutes = {
         {
             path: '/certificates',
             element: <CertificateForm/>
+        },
+        {
+            path: '/adduser',
+            element: <CreateNewUser/>
         },
         {
             path:'/viewCourse',

@@ -22,19 +22,37 @@ const initialState = {
     user: null
 };
 
+// const verifyToken = (serviceToken) => {
+//     if (!serviceToken) {
+//         console.log("Token not found");
+//         return false;
+//     }
+//     const decoded = jwtDecode(serviceToken);
+//     /**
+//      * Property 'exp' does not exist on type '<T = unknown>(token, options) => T'.
+//      */
+//     return decoded.exp > Date.now() / 1000;
+// };
+
 const verifyToken = (serviceToken) => {
     if (!serviceToken) {
+        console.log("Token not found");
         return false;
     }
-    const decoded = jwtDecode(serviceToken);
-    /**
-     * Property 'exp' does not exist on type '<T = unknown>(token, options) => T'.
-     */
-    return decoded.exp > Date.now() / 1000;
+    try {
+        const decoded = jwtDecode(serviceToken);
+        console.log("Decoded token:", decoded);
+        return decoded.exp > Date.now() / 1000;
+    } catch (error) {
+        console.error("Error decoding token:", error);
+        return false;
+    }
 };
 
 const setSession = (serviceToken) => {
+    console.log("Now im setting the session");
     if (serviceToken) {
+        console.log("Now im setting the session in if");
         localStorage.setItem('serviceToken', serviceToken);
         axios.defaults.headers.common.Authorization = `Bearer ${serviceToken}`;
     } else {
@@ -51,8 +69,10 @@ export const JWTProvider = ({ children }) => {
 
     useEffect(() => {
         const init = async () => {
+            console.log("I'm hear");
             try {
                 const serviceToken = window.localStorage.getItem('serviceToken');
+                console.log(verifyToken(serviceToken));
                 if (serviceToken && verifyToken(serviceToken)) {
                     setSession(serviceToken);
                     const response = await axios.get('/api/account/me');
@@ -65,11 +85,13 @@ export const JWTProvider = ({ children }) => {
                         }
                     });
                 } else {
+                    console.log("I have been logout1");
                     dispatch({
                         type: LOGOUT
                     });
                 }
             } catch (err) {
+                console.log("I have been logout");
                 console.error(err);
                 dispatch({
                     type: LOGOUT
@@ -81,7 +103,8 @@ export const JWTProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
-        const response = await axios.post('/api/account/login', { email, password });
+        console.log("im now logging");
+        const response = await axios.post('/api/auth/login', { email, password });
         const { serviceToken, user } = response.data;
         setSession(serviceToken);
         dispatch({
