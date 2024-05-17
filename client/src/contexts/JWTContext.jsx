@@ -42,12 +42,19 @@ const verifyToken = (serviceToken) => {
     try {
         const decoded = jwtDecode(serviceToken);
         console.log("Decoded token:", decoded);
-        return decoded.exp > Date.now() / 1000;
+        if (decoded.exp > Date.now() / 1000) {
+            console.log("Token is valid");
+            return true;
+        } else {
+            console.log("Token is expired");
+            return false;
+        }
     } catch (error) {
         console.error("Error decoding token:", error);
         return false;
     }
 };
+
 
 const setSession = (serviceToken) => {
     console.log("Now im setting the session");
@@ -69,10 +76,10 @@ export const JWTProvider = ({ children }) => {
 
     useEffect(() => {
         const init = async () => {
-            console.log("I'm hear");
+            console.log("Initializing auth state");
             try {
                 const serviceToken = window.localStorage.getItem('serviceToken');
-                console.log(verifyToken(serviceToken));
+                console.log("Initial token:", serviceToken);
                 if (serviceToken && verifyToken(serviceToken)) {
                     setSession(serviceToken);
                     const response = await axios.get('/api/account/me');
@@ -85,28 +92,37 @@ export const JWTProvider = ({ children }) => {
                         }
                     });
                 } else {
-                    console.log("I have been logout1");
+                    console.log("Token is invalid or expired");
                     dispatch({
                         type: LOGOUT
                     });
                 }
             } catch (err) {
-                console.log("I have been logout");
+                console.log("Error during auth initialization");
                 console.error(err);
                 dispatch({
                     type: LOGOUT
                 });
             }
         };
-
+    
         init();
     }, []);
+    
 
     const login = async (email, password) => {
         console.log("im now logging");
         const response = await axios.post('/api/auth/login', { email, password });
-        const { serviceToken, user } = response.data;
-        setSession(serviceToken);
+        // const { serviceToken } = response.data;
+        console.log(response.data);
+        const { permissions,token} = response.data;
+        console.log(permissions,token);
+        const user = {
+            permissions: permissions,
+            token: token
+          };
+          localStorage.setItem('user', JSON.stringify(user));
+        setSession(user.token);
         dispatch({
             type: LOGIN,
             payload: {

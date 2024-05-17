@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const user = require("../models/user");
+import jwt from "jsonwebtoken";
+import User from "../models/user";
 
 const Authmiddleware = async (req, res, next) => {
   const header = req.header("authorization");
@@ -8,8 +8,8 @@ const Authmiddleware = async (req, res, next) => {
   //check if the user is trying to access the below routes
   if (
     /*  req.path === "/" || */
-    req.path === "/api/auth/Register" ||
-    req.path === "/api/auth/login"
+    req.path === "/auth/Register" ||
+    req.path === "/auth/login"
   ) {
     return next();
   }
@@ -43,4 +43,4 @@ const Authmiddleware = async (req, res, next) => {
   });
 };
 
-module.exports = Authmiddleware;
+export default Authmiddleware;

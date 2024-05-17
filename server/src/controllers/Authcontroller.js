@@ -55,19 +55,20 @@ const login = async (req, res) => {
     const permissions = role
       ? {
           user: role.user,
-          certificate: role.course,
+          certificate: role.certificate,
         }
       : {};
 
-    const token = jwt.sign(
-      { _id: user._id, role: user.role, permissions },
-      process.env.JWT_KEY,
-      { expiresIn: "1d" }
-    );
+      const token = jwt.sign(
+        { _id: user._id, email: user.email },
+        process.env.JWT_KEY,
+        { expiresIn: '1h' } // Set token expiry to 1 hour (adjust as needed)
+      );
     /*  console.log(permissions); */
     res.status(200).json({
       message: "Login successful",
       token,
+      permissions
     });
   } catch (error) {
     console.log(error.message);

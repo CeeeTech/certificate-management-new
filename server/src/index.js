@@ -1,7 +1,5 @@
 require("dotenv").config();
 
-const auth = require("./middleware/Authmiddleware");
-
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -11,12 +9,11 @@ const cmsBatchRoutes = require("./routes/Batches");
 const cmsCertificate = require("./routes/Certificate");
 const authroute = require("./routes/authRoutes");
 const roleroute = require("./routes/roleRoutes");
-const studentCertificates = require('./routes/StudentCertificate');
+const studentCertificates = require("./routes/StudentCertificate");
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(auth);
 app.use("/api/auth", authroute);
 app.use("/api/role", roleroute);
 app.use("/api/Student", cmsRoutes);

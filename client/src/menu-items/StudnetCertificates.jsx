@@ -5,20 +5,20 @@ import { FormattedMessage } from 'react-intl';
 
 // assets
 import {
-    IconUserPlus
+    IconUsers
   
 } from '@tabler/icons-react';
 
 // constant
 const icons = {
-    IconUserPlus
+    IconUsers
    
     
 };
 const StudnetCertificates = {
     id: 'Students Certificates',
     title: <FormattedMessage id="Students Certificates" />,
-    icon: icons.IconUserPlus,
+    icon: icons.IconUsers,
     type: 'group',
     url: '/viewStudentCertificates'
 };

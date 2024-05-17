@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const getStudent = async(req,res)=>{
 
     const stu = await Student.find({}).populate({path:'course', select:'courseName'}).sort({cratedAt :-1})
-   console.log("kesjs",stu);
+  
     res.status(200).json(stu)
 }
 

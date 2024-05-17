@@ -6,7 +6,7 @@ import { Button, CardActions, Divider, InputAdornment, Typography, useMediaQuery
 import CircularProgress from '@mui/material/CircularProgress';
 
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import axios from 'utils/axios';
+import axios from 'axios';
 import { useTheme } from '@mui/material/styles';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -78,7 +78,6 @@ export default function StudentForm() {
        
     });
 
-
     const handleSubmit = async (values, { resetForm }) => {
         try {
             const res = await axios.post('http://localhost:8000/api/Student', values);
@@ -104,7 +103,6 @@ export default function StudentForm() {
             }
         }
     };
-    
     return (
         <>
             <MainCard title="Add New Student" >
